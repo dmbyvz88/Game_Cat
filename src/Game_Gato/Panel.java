@@ -20,6 +20,7 @@ public class Panel extends JPanel{
     public Panel(String direccion){
         this.nombre=direccion;
     }
+    @Override
     public void paint(Graphics g){
         Dimension tamaño=getSize();
         imagen=new ImageIcon(getClass().getResource(nombre));
