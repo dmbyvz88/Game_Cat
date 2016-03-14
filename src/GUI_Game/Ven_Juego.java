@@ -5,10 +5,12 @@
  */
 package GUI_Game;
 
+import Class.Estadisticas_Jugadores;
 import Class.Imagen;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,11 +18,16 @@ import javax.swing.ImageIcon;
  */
 public class Ven_Juego extends javax.swing.JInternalFrame {
     Imagen imagen;
+    Estadisticas_Jugadores estadJugadores = new Estadisticas_Jugadores();
     /**
      * Creates new form Ven_Juego
      */
     public Ven_Juego() {
         initComponents();
+        //Carga
+        estadJugadores.cargaJugadores(JOptionPane.showInputDialog("Nombre del primer Jugador: "), 
+                JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
+        
     }
 
     /**

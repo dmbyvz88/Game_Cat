@@ -9,10 +9,9 @@ package Class;
  *
  * @author Diego
  */
-public class Estadisticas_Jugadores {
-    String jugador1, jugador2;
-    public void cargaJugadores(String j1, String j2){
-        this.jugador1=j1;
-        this.jugador2=j2;
+public class Partida_Pendiente {
+    public boolean consultaPartidaPendiente(){
+        
+        return true;
     }
 }
