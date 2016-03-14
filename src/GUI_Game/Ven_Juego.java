@@ -5,8 +5,8 @@
  */
 package GUI_Game;
 
-import Class.Estadisticas_Jugadores;
 import Class.Imagen;
+import Listas.Lista_Jugadores;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class Ven_Juego extends javax.swing.JInternalFrame {
     Imagen imagen;
-    Estadisticas_Jugadores estadJugadores = new Estadisticas_Jugadores();
+    Lista_Jugadores estadJugadores = new Lista_Jugadores();
     /**
      * Creates new form Ven_Juego
      */

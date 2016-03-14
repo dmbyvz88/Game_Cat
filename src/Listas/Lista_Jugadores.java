@@ -15,6 +15,11 @@ import Entidades.Entidad_Jugador;
  */
 public class Lista_Jugadores {
     public Entidad_Jugador primero;
+    String jugador1, jugador2;
+    public void cargaJugadores(String j1, String j2){
+        this.jugador1=j1;
+        this.jugador2=j2;
+    }
     /**
      * Metodo que permite identificar si la lista se encuentra vacia o no
      * @return
@@ -45,7 +50,7 @@ public class Lista_Jugadores {
      * Metodo que permite eliminar un nodo de la lista
      * @param nombreJugador
      */
-    public void eliminaNodo(String nombreJugador){
+    public void eliminaNodoJugador(String nombreJugador){
         if(!esVacia()){
             Entidad_Jugador anterior=primero;  //Creo un anterior de la clase para usarlo solo aqui
             Entidad_Jugador temporal=primero;  //Creo un temporal en el nodo para usarlo aqui
@@ -57,7 +62,12 @@ public class Lista_Jugadores {
                 temporal=null;
             }else{
                 while(temporal!=null){
-                    
+                    anterior=temporal;
+                    temporal=temporal.siguiente;
+                    if (nombreJugador.equals(temporal.getJugador())){
+                        anterior.siguiente=temporal.siguiente;
+                        temporal=null;
+                    }
                 }
             }
         }

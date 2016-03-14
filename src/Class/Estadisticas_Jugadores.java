@@ -10,9 +10,5 @@ package Class;
  * @author Diego
  */
 public class Estadisticas_Jugadores {
-    String jugador1, jugador2;
-    public void cargaJugadores(String j1, String j2){
-        this.jugador1=j1;
-        this.jugador2=j2;
-    }
+    
 }
