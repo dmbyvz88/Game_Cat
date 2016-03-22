@@ -18,16 +18,12 @@ import javax.swing.JOptionPane;
  */
 public class Ven_Juego extends javax.swing.JInternalFrame {
     Imagen imagen;
-    Lista_Jugadores estadJugadores = new Lista_Jugadores();
+    
     /**
      * Creates new form Ven_Juego
      */
     public Ven_Juego() {
         initComponents();
-        //Carga
-        estadJugadores.cargaJugadores(JOptionPane.showInputDialog("Nombre del primer Jugador: "), 
-                JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
-        
     }
 
     /**

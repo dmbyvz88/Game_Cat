@@ -5,19 +5,27 @@
  */
 package GUI_Game;
 
+import Class.CargaJuego;
+
 /**
  *
  * @author Diego
  */
 public class Principal extends javax.swing.JFrame {
-
+     private CargaJuego validaInicioJuego = new CargaJuego();
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
     }
-
+    private void ingreso(int opc){
+        if(this.validaInicioJuego.menuIngresoJuego(opc)){
+            Ven_Juego ven = new Ven_Juego();
+            jDesktopPane1.add(ven);
+            ven.setVisible(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,10 +69,25 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jButton2.setText("Continuar Juego");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Lista Jugadores");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Estadisticas Juego");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -134,10 +157,20 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Ven_Juego ven = new Ven_Juego();
-       jDesktopPane1.add(ven);
-       ven.setVisible(true);
+        ingreso(1);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ingreso(2);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ingreso(3);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ingreso(4);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

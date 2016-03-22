@@ -2,6 +2,7 @@ package Listas;
 
 
 import Entidades.Entidad_Jugador;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,6 +17,7 @@ import Entidades.Entidad_Jugador;
 public class Lista_Jugadores {
     public Entidad_Jugador primero;
     String jugador1, jugador2;
+    int cont=0;
     public void cargaJugadores(String j1, String j2){
         this.jugador1=j1;
         this.jugador2=j2;
@@ -44,7 +46,8 @@ public class Lista_Jugadores {
         else{
             nuevoNodo.siguiente=primero;
             primero=nuevoNodo;
-        }        
+        }
+        cont++;
     }
     /**
      * Metodo que permite eliminar un nodo de la lista
@@ -57,9 +60,11 @@ public class Lista_Jugadores {
             //Primero esenario, es si el primero nodo jugador es el que estamos buscando, por lo que lo elimina
             if (nombreJugador.equals(temporal.getJugador()) && primero.siguiente==null){
                 primero=null;
+                cont=0;
             }else if(nombreJugador.equals(temporal.getJugador()) && primero.siguiente!=null){
                 primero=primero.siguiente;
                 temporal=null;
+                cont--;
             }else{
                 while(temporal!=null){
                     anterior=temporal;
@@ -67,9 +72,31 @@ public class Lista_Jugadores {
                     if (nombreJugador.equals(temporal.getJugador())){
                         anterior.siguiente=temporal.siguiente;
                         temporal=null;
+                        cont--;
                     }
                 }
             }
         }
+    }
+    
+    /**
+     *
+     * @return 
+     */
+    public String[] mostrarListaJugadores(){
+        String [] jugadores = new String[cont];
+        int cuenta=0;
+        if(!esVacia()){
+            Entidad_Jugador temporal=primero;
+            while(temporal!=null){
+                if(temporal!=null){
+                    jugadores[cuenta]=temporal.getJugador();
+                    cuenta++;
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay Jugadores registrados.");
+        }
+        return jugadores;
     }
 }
