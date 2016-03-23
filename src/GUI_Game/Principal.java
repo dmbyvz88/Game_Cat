@@ -6,13 +6,15 @@
 package GUI_Game;
 
 import Class.CargaJuego;
+import Listas.Lista_Jugadores;
 
 /**
  *
  * @author Diego
  */
 public class Principal extends javax.swing.JFrame {
-     private CargaJuego validaInicioJuego = new CargaJuego();
+    public Lista_Jugadores estadJugadores = new Lista_Jugadores();
+    CargaJuego validaInicioJuego = new CargaJuego(estadJugadores);
     /**
      * Creates new form Principal
      */
@@ -20,8 +22,9 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
     }
     private void ingreso(int opc){
-        if(this.validaInicioJuego.menuIngresoJuego(opc)){
-            Ven_Juego ven = new Ven_Juego();
+        estadJugadores=this.validaInicioJuego.menuIngresoJuego(opc, estadJugadores);
+        if(estadJugadores != null){
+            Ven_Juego ven = new Ven_Juego(estadJugadores);
             jDesktopPane1.add(ven);
             ven.setVisible(true);
         }

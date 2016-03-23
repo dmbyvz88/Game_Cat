@@ -1,6 +1,5 @@
 package Listas;
 
-
 import Entidades.Entidad_Jugador;
 import javax.swing.JOptionPane;
 
@@ -16,12 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Lista_Jugadores {
     public Entidad_Jugador primero;
-    String jugador1, jugador2;
-    int cont=0;
-    public void cargaJugadores(String j1, String j2){
-        this.jugador1=j1;
-        this.jugador2=j2;
-    }
+    int cont;
     /**
      * Metodo que permite identificar si la lista se encuentra vacia o no
      * @return
@@ -77,10 +71,9 @@ public class Lista_Jugadores {
                 }
             }
         }
-    }
-    
+    }    
     /**
-     *
+     * Metodo que permite mostrar la lista de los jugadores
      * @return 
      */
     public String[] mostrarListaJugadores(){
@@ -89,8 +82,9 @@ public class Lista_Jugadores {
         if(!esVacia()){
             Entidad_Jugador temporal=primero;
             while(temporal!=null){
-                if(temporal!=null){
+                if(cuenta<cont){
                     jugadores[cuenta]=temporal.getJugador();
+                    temporal=temporal.siguiente;
                     cuenta++;
                 }
             }
