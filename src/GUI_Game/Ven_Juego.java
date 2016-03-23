@@ -5,6 +5,7 @@
  */
 package GUI_Game;
 
+import Class.ConsultaEstadoJuego;
 import Class.Imagen;
 import Class.RigaInicioPartida;
 import Listas.Lista_Jugadores;
@@ -12,17 +13,21 @@ import java.awt.Color;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Diego
  */
 public class Ven_Juego extends javax.swing.JInternalFrame {
+    String [][] gatoGame = new String [3][3];
     RigaInicioPartida ganador = new RigaInicioPartida();
     Imagen imagen;
     Lista_Jugadores listaJugadores;
     String [] jugadores;
     String jugMoviendo;//Esta variable indica cual jugador tiene que mover en este momento
+    ConsultaEstadoJuego estaGame;
+    
     /**
      * Creates new form Ven_Juego
      * @param lista
@@ -48,6 +53,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             lbJugador2.setForeground(Color.red);
             lbJugador1.setForeground(Color.black);
         }
+        limpiaMatriz();
     }
     
     /**
@@ -64,7 +70,26 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             lbJugador2.setForeground(Color.red);
         }
     }
-
+    
+    /**
+     * Metodo que permite limpiar la matriz
+     */
+    private void limpiaMatriz(){
+        for(int i=0; i < gatoGame.length; i++){
+            for(int j=0; j < gatoGame.length; j++){
+                gatoGame[i][j]="";
+            }
+        }
+    }
+    
+    /**
+     *
+     */
+    private void resultadoGame(){
+        if(estaGame.ConsultaEstadoJuego(gatoGame)){
+            JOptionPane.showConfirmDialog(null, "Juego Ganado");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,20 +128,60 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         });
 
         lb2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 2, new java.awt.Color(204, 153, 255)));
+        lb2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb2MouseClicked(evt);
+            }
+        });
 
         lb3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 2, 0, new java.awt.Color(204, 153, 255)));
+        lb3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb3MouseClicked(evt);
+            }
+        });
 
         lb4.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 2, 2, new java.awt.Color(204, 153, 255)));
+        lb4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb4MouseClicked(evt);
+            }
+        });
 
         lb5.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 153, 255)));
+        lb5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb5MouseClicked(evt);
+            }
+        });
 
         lb6.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 0, new java.awt.Color(204, 153, 255)));
+        lb6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb6MouseClicked(evt);
+            }
+        });
 
         lb7.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 2, new java.awt.Color(204, 153, 255)));
+        lb7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb7MouseClicked(evt);
+            }
+        });
 
         lb8.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 0, 2, new java.awt.Color(204, 153, 255)));
+        lb8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb8MouseClicked(evt);
+            }
+        });
 
         lb9.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 0, 0, new java.awt.Color(204, 153, 255)));
+        lb9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb9MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -124,11 +189,10 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lb7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                        .addComponent(lb4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lb1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lb7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(lb4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lb5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
@@ -145,11 +209,10 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lb2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                        .addComponent(lb3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lb1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lb2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(lb3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lb6, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
@@ -237,13 +300,144 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
             lb1.setIcon(icono);
+            gatoGame[0][0]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
             lb1.setIcon(icono);
+            gatoGame[0][0]="X";
         }
+        resultadoGame();
         cambioJugador();
     }//GEN-LAST:event_lb1MouseClicked
+
+    private void lb2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb2MouseClicked
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                    .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
+            lb2.setIcon(icono);
+            gatoGame[0][1]="O";
+        }else{
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                    .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
+            lb2.setIcon(icono);
+            gatoGame[0][1]="X";
+        }
+        resultadoGame();
+        cambioJugador();
+    }//GEN-LAST:event_lb2MouseClicked
+
+    private void lb3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb3MouseClicked
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                    .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
+            lb3.setIcon(icono);
+            gatoGame[0][2]="O";
+        }else{
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                    .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
+            lb3.setIcon(icono);
+            gatoGame[0][2]="X";
+        }
+        resultadoGame();
+        cambioJugador();
+    }//GEN-LAST:event_lb3MouseClicked
+
+    private void lb4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb4MouseClicked
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                    .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
+            lb4.setIcon(icono);
+            gatoGame[1][0]="O";
+        }else{
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                    .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
+            lb4.setIcon(icono);
+            gatoGame[1][0]="X";
+        }
+        resultadoGame();
+        cambioJugador();
+    }//GEN-LAST:event_lb4MouseClicked
+
+    private void lb5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb5MouseClicked
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                    .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
+            lb5.setIcon(icono);
+            gatoGame[1][1]="O";
+        }else{
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                    .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
+            lb5.setIcon(icono);
+            gatoGame[1][1]="X";
+        }
+        resultadoGame();
+        cambioJugador();
+    }//GEN-LAST:event_lb5MouseClicked
+
+    private void lb6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb6MouseClicked
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                    .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
+            lb6.setIcon(icono);
+            gatoGame[1][2]="O";
+        }else{
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                    .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
+            lb6.setIcon(icono);
+            gatoGame[1][2]="X";
+        }
+        resultadoGame();
+        cambioJugador();
+    }//GEN-LAST:event_lb6MouseClicked
+
+    private void lb7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb7MouseClicked
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                    .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
+            lb7.setIcon(icono);
+            gatoGame[2][0]="O";
+        }else{
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                    .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
+            lb7.setIcon(icono);
+            gatoGame[2][0]="X";
+        }
+        resultadoGame();
+        cambioJugador();
+    }//GEN-LAST:event_lb7MouseClicked
+
+    private void lb8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb8MouseClicked
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                    .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
+            lb8.setIcon(icono);
+            gatoGame[2][1]="O";
+        }else{
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                    .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
+            lb8.setIcon(icono);
+            gatoGame[2][1]="X";
+        }
+        resultadoGame();
+        cambioJugador();
+    }//GEN-LAST:event_lb8MouseClicked
+
+    private void lb9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb9MouseClicked
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                    .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
+            lb9.setIcon(icono);
+            gatoGame[2][2]="O";
+        }else{
+            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                    .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
+            lb9.setIcon(icono);
+            gatoGame[2][2]="X";
+        }
+        resultadoGame();
+        cambioJugador();
+    }//GEN-LAST:event_lb9MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
