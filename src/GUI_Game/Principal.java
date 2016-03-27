@@ -15,6 +15,7 @@ import Listas.Lista_Jugadores;
 public class Principal extends javax.swing.JFrame {
     public Lista_Jugadores estadJugadores = new Lista_Jugadores();
     CargaJuego validaInicioJuego = new CargaJuego(estadJugadores);
+//    public String [][] juego = new String [3][3];
     /**
      * Creates new form Principal
      */

@@ -20,13 +20,13 @@ import javax.swing.JOptionPane;
  * @author Diego
  */
 public class Ven_Juego extends javax.swing.JInternalFrame {
-    String [][] gatoGame = new String [3][3];
+    public String [][] matrizJuego = new String [3][3];
     RigaInicioPartida ganador = new RigaInicioPartida();
     Imagen imagen;
     Lista_Jugadores listaJugadores;
     String [] jugadores;
     String jugMoviendo;//Esta variable indica cual jugador tiene que mover en este momento
-    ConsultaEstadoJuego estaGame;
+    ConsultaEstadoJuego estaGame = new ConsultaEstadoJuego();
     
     /**
      * Creates new form Ven_Juego
@@ -36,8 +36,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         this.listaJugadores=lista;
         initComponents();
         cargaJugadores();
-    }
-    
+    }    
     /**
      * Carga los nombres de los jugadores a los jLabels
      */
@@ -54,8 +53,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             lbJugador1.setForeground(Color.black);
         }
         limpiaMatriz();
-    }
-    
+    }    
     /**
      * Cambia de jugador cada vez que se haiga realizado una jugada
      */
@@ -69,26 +67,37 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             lbJugador1.setForeground(Color.black);
             lbJugador2.setForeground(Color.red);
         }
-    }
-    
+    }    
     /**
      * Metodo que permite limpiar la matriz
      */
     private void limpiaMatriz(){
-        for(int i=0; i < gatoGame.length; i++){
-            for(int j=0; j < gatoGame.length; j++){
-                gatoGame[i][j]="";
-            }
+        matrizJuego=estaGame.limpiaMatriz(matrizJuego);
+    }    
+    /**
+     * Realiza la comparación entre todas las casilla para identificar si se ah ganado el juego o no
+     */
+    private void resultadoGame(){
+        if(estaGame.ConsultaEstadoJuego(matrizJuego)){
+            JOptionPane.showConfirmDialog(null, "Juego Ganado");
+            limpiaMatrizJuego();
         }
     }
     
     /**
-     *
+     * Metodo que permite limpiar los objetos y la matriz del juego
      */
-    private void resultadoGame(){
-        if(estaGame.ConsultaEstadoJuego(gatoGame)){
-            JOptionPane.showConfirmDialog(null, "Juego Ganado");
-        }
+    private void limpiaMatrizJuego(){
+        lb1.setIcon(null);
+        lb2.setIcon(null);
+        lb3.setIcon(null);
+        lb4.setIcon(null);
+        lb5.setIcon(null);
+        lb6.setIcon(null);
+        lb7.setIcon(null);
+        lb8.setIcon(null);
+        lb9.setIcon(null);
+        resultadoGame();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -300,12 +309,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
             lb1.setIcon(icono);
-            gatoGame[0][0]="O";
+            matrizJuego[0][0]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
             lb1.setIcon(icono);
-            gatoGame[0][0]="X";
+            matrizJuego[0][0]="X";
         }
         resultadoGame();
         cambioJugador();
@@ -316,12 +325,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
             lb2.setIcon(icono);
-            gatoGame[0][1]="O";
+            matrizJuego[0][1]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
             lb2.setIcon(icono);
-            gatoGame[0][1]="X";
+            matrizJuego[0][1]="X";
         }
         resultadoGame();
         cambioJugador();
@@ -332,12 +341,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
             lb3.setIcon(icono);
-            gatoGame[0][2]="O";
+            matrizJuego[0][2]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
             lb3.setIcon(icono);
-            gatoGame[0][2]="X";
+            matrizJuego[0][2]="X";
         }
         resultadoGame();
         cambioJugador();
@@ -348,12 +357,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
             lb4.setIcon(icono);
-            gatoGame[1][0]="O";
+            matrizJuego[1][0]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
             lb4.setIcon(icono);
-            gatoGame[1][0]="X";
+            matrizJuego[1][0]="X";
         }
         resultadoGame();
         cambioJugador();
@@ -364,12 +373,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
             lb5.setIcon(icono);
-            gatoGame[1][1]="O";
+            matrizJuego[1][1]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
             lb5.setIcon(icono);
-            gatoGame[1][1]="X";
+            matrizJuego[1][1]="X";
         }
         resultadoGame();
         cambioJugador();
@@ -380,12 +389,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
             lb6.setIcon(icono);
-            gatoGame[1][2]="O";
+            matrizJuego[1][2]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
             lb6.setIcon(icono);
-            gatoGame[1][2]="X";
+            matrizJuego[1][2]="X";
         }
         resultadoGame();
         cambioJugador();
@@ -396,12 +405,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
             lb7.setIcon(icono);
-            gatoGame[2][0]="O";
+            matrizJuego[2][0]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
             lb7.setIcon(icono);
-            gatoGame[2][0]="X";
+            matrizJuego[2][0]="X";
         }
         resultadoGame();
         cambioJugador();
@@ -412,12 +421,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
             lb8.setIcon(icono);
-            gatoGame[2][1]="O";
+            matrizJuego[2][1]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
             lb8.setIcon(icono);
-            gatoGame[2][1]="X";
+            matrizJuego[2][1]="X";
         }
         resultadoGame();
         cambioJugador();
@@ -428,12 +437,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
                     .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
             lb9.setIcon(icono);
-            gatoGame[2][2]="O";
+            matrizJuego[2][2]="O";
         }else{
             Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
                     .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
             lb9.setIcon(icono);
-            gatoGame[2][2]="X";
+            matrizJuego[2][2]="X";
         }
         resultadoGame();
         cambioJugador();
