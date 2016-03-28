@@ -9,7 +9,7 @@ package Class;
  * @author Diego
  */
 public class ConsultaEstadoJuego {
-    boolean ganado= false;
+    
     public ConsultaEstadoJuego(){        
     }    
     /**
@@ -19,50 +19,73 @@ public class ConsultaEstadoJuego {
      */
     public boolean ConsultaEstadoJuego(String [][] matriz){
         imprimeMatriz(matriz);
-        //Recorre y compara las filas de la matriz
-        for(int i=0; i < matriz.length; i++){
-            if(!"".equals(matriz[i][0]) && !"".equals(matriz[i][1]) && !"".equals(matriz[i][2]) 
-                    && matriz[i][0]!=null && matriz[i][1]!=null && matriz[i][2]!=null){
-                if(matriz[i][0].equals(matriz[i][1]) && matriz[i][0].equals(matriz[i][2])){
-                    ganado=true;
-                }
-                break;
-            }
-            break;
+        if(consultaColumnas(matriz)){
+            return true;
+        }else if(consultaFilas(matriz)){
+            return true;
+        }else if(consultaDiagonales(matriz)){
+            return true;
+        }else{
+            return false;
         }
+    }
+    /**
+     * Metodo que permite comparar los valores de las columnas entre si
+     * @param m
+     * @return
+     */
+    public boolean consultaColumnas(String[][] m){
         //Recorre y compara las columnas de la matriz
-        for(int i=0; i < matriz.length; i++){
-            if(!"".equals(matriz[0][i]) && !"".equals(matriz[1][i]) && !"".equals(matriz[2][i])
-                    && matriz[0][i]!=null && matriz[1][i]!=null && matriz[2][i]!=null){
-                if(matriz[0][i].equals(matriz[1][i]) && matriz[0][i].equals(matriz[2][i])){
-                    ganado=true;
-                }
-            }
-        }
-        //Recorre y compara las columnas de la matriz
-        for(int i=0; i < matriz.length; i++){
-            for(int j=0; j < matriz.length; j++){
-                if(i==0 && j==0){
-                    if(!"".equals(matriz[i][j]) && !"".equals(matriz[i+1][j+1]) && !"".equals(matriz[i+2][j+2])
-                            && matriz[i][j]!=null && matriz[i+1][1+1]!=null && matriz[i+2][i+2]!=null){
-                        if(matriz[i][j].equals(matriz[i+1][j+1]) && matriz[i][j].equals(matriz[i+2][j+2])){
-                            ganado=true;
-                            break;
-                        }
+        boolean ganado= false;
+        for(int i=0; i < m.length; i++){
+            for(int j=0; j < m.length; j++){
+                if(!"".equals(m[i][j]) && m[i][j]!=null && !"".equals(m[i+1][j]) && m[i+1][i]!=null
+                        && !"".equals(m[i+2][j]) && m[i+2][i]!=null){
+                    if(m[i][j].equals(m[i+1][i]) && m[i+1][j].equals(m[i+2][i]) && m[i+2][j].equals(m[i][i])){
+                        ganado=true;
+                    }else{
+                        ganado=false;
                     }
-                }else if(i==0 && j==3){
-                    if(!"".equals(matriz[i][j]) && !"".equals(matriz[i-1][j-1]) && !"".equals(matriz[i-2][j-2])
-                            && matriz[i][j]!=null && matriz[i-1][j-1]!=null && matriz[i-2][j-2]!=null){
-                        if(matriz[i][j].equals(matriz[i-1][j-1]) && matriz[i][j].equals(matriz[i-2][j-2])){
-                            ganado=true;
-                            break;
-                        }
-                    }
+                }else{
+                    ganado=false;
                 }
             }
         }
         return ganado;
     }
+    /**
+     * Metodo que permite comparar los valores de las filas entre si
+     * @param m
+     * @return
+     */
+    private boolean consultaFilas(String [][] m){
+        //Recorre y compara las columnas de la matriz
+        boolean ganado= false;
+        for(int i=0; i < m.length; i++){
+            for(int j=0; j < m.length; j++){
+                if(!"".equals(m[i][j]) && m[i][j]!=null && !"".equals(m[i][j+1]) && m[i][i+1]!=null
+                        && !"".equals(m[i][j+2]) && m[i][i+2]!=null){
+                    if(m[i][j].equals(m[i][i+1]) && m[i][j+1].equals(m[i][i+2]) && m[i][j+2].equals(m[i][i])){
+                        ganado=true;
+                    }else{
+                        ganado=false;
+                    }
+                }else{
+                    ganado=false;
+                }
+            }
+        }
+        return ganado;
+    }
+    
+    public boolean consultaDiagonales(String [][] m){
+        
+        return true;
+    }    
+    /**
+     * Metodo que permite imprimir todos lo valores correspondientes a la matriz
+     * @param matriz
+     */
     private void imprimeMatriz(String [][] matriz){
         for(int i=0; i < matriz.length; i++){
             for(int j=0; j < matriz.length; j++){
@@ -71,9 +94,8 @@ public class ConsultaEstadoJuego {
             System.out.println();
         }
     }
-
     /**
-     *
+     * Metodo que permite limpiar los datos que se encuentran almacenados en la matriz
      * @param matriz
      * @return
      */
