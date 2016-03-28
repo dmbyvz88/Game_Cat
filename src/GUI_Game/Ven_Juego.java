@@ -72,13 +72,13 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      * Metodo que permite limpiar la matriz
      */
     private void limpiaMatriz(){
-        matrizJuego=estaGame.limpiaMatriz(matrizJuego);
+        matrizJuego=null;
     }    
     /**
      * Realiza la comparación entre todas las casilla para identificar si se ah ganado el juego o no
      */
     private void resultadoGame(){
-        if(estaGame.ConsultaEstadoJuego(matrizJuego)){
+        if(estaGame.consultaEstadoJuego(matrizJuego)){
             JOptionPane.showConfirmDialog(null, "Juego Ganado");
             limpiaMatrizJuego();
         }
@@ -97,7 +97,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         lb7.setIcon(null);
         lb8.setIcon(null);
         lb9.setIcon(null);
-        resultadoGame();
+        limpiaMatriz();
     }
     /**
      * This method is called from within the constructor to initialize the form.
