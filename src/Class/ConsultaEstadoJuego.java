@@ -116,4 +116,18 @@ public class ConsultaEstadoJuego {
             System.out.println();
         }
     }
+    /**
+     * Metodo que permite limpiar los datos que se encuentran almacenados en la matriz
+     * @param matriz
+     * @return
+     */
+    public String[][] limpiaMatriz(String [][] matriz){
+        for(int i=0; i < matriz.length; i++){
+            for(int j=0; j < matriz.length; j++){
+                matriz[i][j]=null;
+            }
+            System.out.println();
+        }
+        return matriz;
+    }
 }

@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author Diego
  */
 public class Ven_Juego extends javax.swing.JInternalFrame {
-    public String [][] matrizJuego = new String [3][3];
+    public String [][] matrizJuego = new String[3][3];
     RigaInicioPartida ganador = new RigaInicioPartida();
     Imagen imagen;
     Lista_Jugadores listaJugadores;
@@ -72,7 +72,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      * Metodo que permite limpiar la matriz
      */
     private void limpiaMatriz(){
-        matrizJuego=null;
+        matrizJuego=estaGame.limpiaMatriz(matrizJuego);
     }    
     /**
      * Realiza la comparación entre todas las casilla para identificar si se ah ganado el juego o no
