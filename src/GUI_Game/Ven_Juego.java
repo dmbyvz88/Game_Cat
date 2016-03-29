@@ -14,6 +14,7 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_OPTION;
 
 /**
  *
@@ -79,8 +80,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      */
     private void resultadoGame(){
         if(estaGame.consultaEstadoJuego(matrizJuego)){
-            JOptionPane.showConfirmDialog(null, "Juego Ganado");
-            limpiaMatrizJuego();
+            if(YES_OPTION==JOptionPane.showConfirmDialog(null, "Juego Ganado \n ¿Desea Jugar nuevamente?.")){
+                limpiaMatrizJuego();
+            }else{
+                limpiaMatrizJuego();
+                this.dispose();
+            }
         }
     }
     

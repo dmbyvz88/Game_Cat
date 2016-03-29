@@ -37,12 +37,10 @@ public class ConsultaEstadoJuego {
         //Recorre y compara las columnas de la matriz
         boolean ganado= false;
         for(int i=0; i < m.length; i++){
-            if(!"".equals(m[i][0]) && m[i][0]!=null && !"".equals(m[i][1]) && m[i][1]!=null
-                    && !"".equals(m[i][2]) && m[i][2]!=null){
-                if(m[i][0].equals(m[i][1]) && m[i][1].equals(m[i][2]) && m[i][2].equals(m[i][0])){
+            if(!"".equals(m[0][i]) && m[0][i]!=null && !"".equals(m[1][i]) && m[1][i]!=null
+                    && !"".equals(m[2][i]) && m[2][i]!=null){
+                if(m[0][i].equals(m[1][i]) && m[1][i].equals(m[2][i]) && m[2][i].equals(m[0][i])){
                     ganado=true;
-                }else{
-                    ganado=false;
                 }
             }
         }
@@ -57,15 +55,11 @@ public class ConsultaEstadoJuego {
         //Recorre y compara las columnas de la matriz
         boolean ganado= false;
         for(int i=0; i < m.length; i++){
-            if(!"".equals(m[0][i]) && m[0][i]!=null && !"".equals(m[1][i]) && m[1][i]!=null
-                    && !"".equals(m[2][i]) && m[2][i]!=null){
-                if(m[0][i].equals(m[1][i]) && m[1][i].equals(m[2][i]) && m[2][i].equals(m[0][i])){
+            if(!"".equals(m[i][0]) && m[i][0]!=null && !"".equals(m[i][1]) && m[i][1]!=null
+                    && !"".equals(m[i][2]) && m[i][2]!=null){
+                if(m[i][0].equals(m[i][1]) && m[i][1].equals(m[i][2]) && m[i][2].equals(m[i][0])){
                     ganado=true;
-                }else{
-                    ganado=false;
                 }
-            }else{
-                ganado=false;
             }
         }
         return ganado;
@@ -124,9 +118,8 @@ public class ConsultaEstadoJuego {
     public String[][] limpiaMatriz(String [][] matriz){
         for(int i=0; i < matriz.length; i++){
             for(int j=0; j < matriz.length; j++){
-                matriz[i][j]=null;
+                matriz[i][j]="";
             }
-            System.out.println();
         }
         return matriz;
     }
