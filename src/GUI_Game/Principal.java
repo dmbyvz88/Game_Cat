@@ -7,6 +7,8 @@ package GUI_Game;
 
 import Class.CargaJuego;
 import Listas.Lista_Jugadores;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_OPTION;
 
 /**
  *
@@ -15,20 +17,55 @@ import Listas.Lista_Jugadores;
 public class Principal extends javax.swing.JFrame {
     public Lista_Jugadores estadJugadores = new Lista_Jugadores();
     CargaJuego validaInicioJuego = new CargaJuego(estadJugadores);
-//    public String [][] juego = new String [3][3];
+    public static String[] listaJugadores;
+    public static String [][] matrizJuegoPendiente = new String [3][3];
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
     }
-    private void ingreso(int opc){
-        estadJugadores=this.validaInicioJuego.menuIngresoJuego(opc, estadJugadores);
-        if(estadJugadores != null){
-            Ven_Juego ven = new Ven_Juego(estadJugadores);
-            jDesktopPane1.add(ven);
-            ven.setVisible(true);
+    private void menu(int opc){
+        switch(opc){
+            case 1://Registra los Jugadores que desean jugar
+                estadJugadores=this.validaInicioJuego.menuIngresoJuego(estadJugadores);
+                if(estadJugadores != null){
+                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores);
+                    jDesktopPane1.add(ven);
+                    ven.setVisible(true);
+                }
+                break;
+            case 2:
+                if(validaInicioJuego.validaMatrizJuego(matrizJuegoPendiente) 
+                        && YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea reanudar el juego anterior?.")){
+                        Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores);
+                        jDesktopPane1.add(ven);
+                        ven.setVisible(true);
+                }else{
+                    estadJugadores=this.validaInicioJuego.menuIngresoJuego(estadJugadores);
+                    if(estadJugadores != null){
+                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores);
+                    jDesktopPane1.add(ven);
+                    ven.setVisible(true);
+                }
+                }
+                break;
+            case 3:
+                listaJugadores=estadJugadores.mostrarListaJugadores();
+                JOptionPane.showMessageDialog(null, "Los Jugadores actuales son: \n"
+                        + muestaListaJugadores(listaJugadores));
+                break;
         }
+    }
+    /**
+     * Carga lista de jugadores en un string
+     */
+    private String muestaListaJugadores(String [] lista){
+        String jugadores="";
+        for(int i=0; i<lista.length;i++){
+            jugadores+= lista[i] + "\n";
+        }
+        return jugadores;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,19 +198,19 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ingreso(1);
+        menu(1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ingreso(2);
+        menu(2);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ingreso(3);
+        menu(3);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ingreso(4);
+        menu(4);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

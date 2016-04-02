@@ -5,6 +5,7 @@
  */
 package Class;
 
+import GUI_Game.Principal;
 import Listas.Lista_Jugadores;
 import javax.swing.JOptionPane;
 
@@ -14,33 +15,36 @@ import javax.swing.JOptionPane;
  */
 public class CargaJuego {
     Lista_Jugadores estadJugadores;
-    private String[] listaJugadores;
+    String [][] matrizJuegoPendiente;
+    String [] jugadores = new String[2];
     public CargaJuego(Lista_Jugadores lista){
         this.estadJugadores=lista;
     }
     /**
      * Despliega en menú de opciones según la selección realizada previamente
-     * @param opc
      * @param lista
      * @return
      */
-    public Lista_Jugadores menuIngresoJuego(int opc, Lista_Jugadores lista){
-        estadJugadores=lista;
-        switch(opc){
-            case 1:
-                //Registra los Jugadores que desean jugar
-                estadJugadores.insertaNodoJugador(JOptionPane.showInputDialog("Nombre del primer Jugador: "));
-                estadJugadores.insertaNodoJugador(JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                listaJugadores=estadJugadores.mostrarListaJugadores();
-                JOptionPane.showMessageDialog(null, "Los Jugadores actuales son: \n"
-                        + listaJugadores[0] +"\n" +listaJugadores[1]);
-                break;
+    public Lista_Jugadores menuIngresoJuego(Lista_Jugadores lista){
+        lista.insertaNodoJugador(jugadores[0]=JOptionPane.showInputDialog("Nombre del primer Jugador: "));
+        lista.insertaNodoJugador(jugadores[1]=JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
+        Principal.listaJugadores=jugadores;
+        return lista;
+    }
+    /**
+     *
+     * @param matriz
+     * @return
+     */
+    public boolean validaMatrizJuego(String [][] matriz){
+        boolean valido=false;
+        for(int i=0; i<matriz.length; i++){
+            for(int j=0; j<matriz.length; j++){
+                if(!"".equals(matriz[i][j])){
+                    valido= true;
+                }
+            }
         }
-        return estadJugadores;
+        return valido;
     }
 }

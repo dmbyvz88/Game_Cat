@@ -8,7 +8,6 @@ package GUI_Game;
 import Class.ConsultaEstadoJuego;
 import Class.Imagen;
 import Class.RigaInicioPartida;
-import Listas.Lista_Jugadores;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.Icon;
@@ -24,17 +23,18 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     public String [][] matrizJuego = new String[3][3];
     RigaInicioPartida ganador = new RigaInicioPartida();
     Imagen imagen;
-    Lista_Jugadores listaJugadores;
-    String [] jugadores;
+    public String [] jugadores;
     String jugMoviendo;//Esta variable indica cual jugador tiene que mover en este momento
     ConsultaEstadoJuego estaGame = new ConsultaEstadoJuego();
     
     /**
      * Creates new form Ven_Juego
-     * @param lista
+     * @param matrizJuego
+     * @param jugadores
      */
-    public Ven_Juego(Lista_Jugadores lista) {
-        this.listaJugadores=lista;
+    public Ven_Juego(String [][] matrizJuego, String[] jugadores) {
+        this.jugadores=jugadores;
+        this.matrizJuego=matrizJuego;
         initComponents();
         cargaJugadores();
     }    
@@ -42,7 +42,6 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      * Carga los nombres de los jugadores a los jLabels
      */
     private void cargaJugadores(){
-        jugadores=listaJugadores.mostrarListaJugadores();
         lbJugador1.setText(jugadores[0]);
         lbJugador2.setText(jugadores[1]);
         jugMoviendo=ganador.RigaInicioPartida(lbJugador1.getText(), lbJugador2.getText());
@@ -87,8 +86,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
                 this.dispose();
             }
         }
-    }
-    
+    }    
     /**
      * Metodo que permite limpiar los objetos y la matriz del juego
      */
@@ -103,6 +101,18 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         lb8.setIcon(null);
         lb9.setIcon(null);
         limpiaMatriz();
+    }
+    /**
+     * Metodo que permite comprovar si se cerró la ventana y si hay un juego pendiente lo guarda.
+     */
+    public void cierreVentana(){
+        if(estaGame.consultaEstadoJuego(matrizJuego)){
+            Principal.matrizJuegoPendiente=matrizJuego;
+            Principal.listaJugadores[0]=lbJugador1.getText();
+            Principal.listaJugadores[1]=lbJugador2.getText();
+        }else{
+            //Principal.jPendiente=new Entidad_Juego_Pendiente(matrizJuego, "", "");
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,8 +138,8 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         lbJugador1 = new javax.swing.JLabel();
         lbJugador2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btSalirPartida = new javax.swing.JButton();
 
-        setClosable(true);
         setTitle("Game");
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 204), 2, true));
@@ -270,29 +280,44 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel1.setText("El jugador que se encuentre en color Rojo, es al que le corresponde el tuno.");
 
+        btSalirPartida.setText("Salir");
+        btSalirPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalirPartidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btSalirPartida)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btSalirPartida)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -453,8 +478,13 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         cambioJugador();
     }//GEN-LAST:event_lb9MouseClicked
 
+    private void btSalirPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirPartidaActionPerformed
+        cierreVentana();
+    }//GEN-LAST:event_btSalirPartidaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSalirPartida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -468,7 +498,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb7;
     private javax.swing.JLabel lb8;
     private javax.swing.JLabel lb9;
-    private javax.swing.JLabel lbJugador1;
-    private javax.swing.JLabel lbJugador2;
+    public static javax.swing.JLabel lbJugador1;
+    public static javax.swing.JLabel lbJugador2;
     // End of variables declaration//GEN-END:variables
 }
