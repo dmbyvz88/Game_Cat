@@ -124,5 +124,24 @@ public class ConsultaEstadoJuego {
             }
         }
         return matriz;
-    }    
+    }  
+    /**
+     * Metodo que valida si la matriz está vacia o no
+     * @param matriz
+     * @return
+     */
+    public boolean validacionMatriz(String [][] matriz){
+        boolean validez=false;
+        if(matriz!=null){
+            for(int i=0; i < matriz.length; i++){
+                for(int j=0; j < matriz.length; j++){
+                    if(matriz[i][j]!=null && !"".equals(matriz[i][j])){
+                        validez=true;
+                        break;
+                    }
+                }
+            }
+        }
+        return validez;
+    }
 }

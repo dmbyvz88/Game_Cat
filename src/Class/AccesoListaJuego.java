@@ -13,11 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author Diego
  */
-public class CargaJuego {
+public class AccesoListaJuego {
     Lista_Jugadores estadJugadores;
     String [][] matrizJuegoPendiente;
     String [] jugadores = new String[2];
-    public CargaJuego(Lista_Jugadores lista){
+    
+    public AccesoListaJuego(Lista_Jugadores lista){
         this.estadJugadores=lista;
     }
     /**
@@ -30,21 +31,5 @@ public class CargaJuego {
         lista.insertaNodoJugador(jugadores[1]=JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
         Principal.listaJugadores=jugadores;
         return lista;
-    }
-    /**
-     *
-     * @param matriz
-     * @return
-     */
-    public boolean validaMatrizJuego(String [][] matriz){
-        boolean valido=false;
-        for(int i=0; i<matriz.length; i++){
-            for(int j=0; j<matriz.length; j++){
-                if(!"".equals(matriz[i][j])){
-                    valido= true;
-                }
-            }
-        }
-        return valido;
     }
 }

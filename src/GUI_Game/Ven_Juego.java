@@ -106,13 +106,24 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      * Metodo que permite comprovar si se cerró la ventana y si hay un juego pendiente lo guarda.
      */
     public void cierreVentana(){
-        if(estaGame.consultaEstadoJuego(matrizJuego)){
-            Principal.matrizJuegoPendiente=matrizJuego;
-            Principal.listaJugadores[0]=lbJugador1.getText();
-            Principal.listaJugadores[1]=lbJugador2.getText();
+        if(!estaGame.consultaEstadoJuego(matrizJuego) && YES_OPTION==JOptionPane.showConfirmDialog(null,"¿Desea guardar la partida actual?")){
+            jugadores[0]=lbJugador1.getText();
+            jugadores[1]=lbJugador2.getText();
+            envioDatosPrincipal();
         }else{
-            //Principal.jPendiente=new Entidad_Juego_Pendiente(matrizJuego, "", "");
+            limpiaMatriz();
+            envioDatosPrincipal();
+            jugadores[0]="";
+            jugadores[1]="";
         }
+    }
+    /**
+     * Metodo que envia los datos de la matriz y los jugadores a la ventana principal
+     */
+    public void envioDatosPrincipal(){
+        Principal.matrizJuegoPendiente=matrizJuego;
+        Principal.listaJugadores[0]=jugadores[0];
+        Principal.listaJugadores[1]=jugadores[1];
     }
     /**
      * This method is called from within the constructor to initialize the form.
