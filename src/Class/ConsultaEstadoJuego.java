@@ -122,7 +122,7 @@ public class ConsultaEstadoJuego {
         if(matriz!=null){
             for(int i=0; i < matriz.length; i++){
                 for(int j=0; j < matriz.length; j++){
-                    if(matriz[i][j]!=null && !"".equals(matriz[i][j])){
+                    if(!"".equals(matriz[i][j])){
                         validez=true;
                         break;
                     }
@@ -131,7 +131,6 @@ public class ConsultaEstadoJuego {
         }
         return validez;
     }
-
     /**
      * Recorre la matriz y suma cuando se repite algun dato
      * @param matriz

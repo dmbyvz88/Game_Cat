@@ -31,17 +31,156 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      * Creates new form Ven_Juego
      * @param matrizJuego
      * @param jugadores
+     * @param jugMoviendo
      */
-    public Ven_Juego(String [][] matrizJuego, String[] jugadores) {
+    public Ven_Juego(String [][] matrizJuego, String[] jugadores, String jugMoviendo) {
         this.jugadores=jugadores;
         this.matrizJuego=matrizJuego;
+        this.jugMoviendo=jugMoviendo;
         initComponents();
-        cargaJugadores();
-    }    
+        if(estaGame.validacionMatriz(matrizJuego)){
+            cargaJuegoAnterior();
+        }else{
+            cargaNewJugadores();
+        }
+    }
+    /**
+     * Metodo que recorre la matriz del juego para cargar las imagenes en cada label
+     */
+    public void cargaJuegoAnterior(){
+        for(int i=0; i < matrizJuego.length; i++){
+            for(int j=0; j < matrizJuego.length; j++){
+                if(!"".equals(matrizJuego[i][j]) && matrizJuego[i][j]!=null){
+                    asignaImagenes(matrizJuego[i][j], i, j);
+                }
+            }
+        }
+        lbJugador1.setText(jugadores[0]);
+        lbJugador2.setText(jugadores[1]);
+    }
+    /**
+     * Metodo que asigan
+     * @param val
+     * @param columna
+     * @param fila
+     */
+    public void asignaImagenes(String val, int columna, int fila){
+        switch(consultaPosicion(columna, fila)){
+            case "00":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
+                    lb1.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
+                    lb1.setIcon(icono);
+                }
+                break;
+            case "01":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
+                    lb2.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
+                    lb2.setIcon(icono);
+                }
+                break;
+            case "02":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
+                    lb3.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
+                    lb3.setIcon(icono);
+                }
+                break;
+            case "10":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
+                    lb4.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
+                    lb4.setIcon(icono);
+                }
+                break;
+            case "11":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
+                    lb5.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
+                    lb5.setIcon(icono);
+                }
+                break;
+            case "12":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
+                    lb6.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
+                    lb6.setIcon(icono);
+                }
+                break;
+            case "20":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
+                    lb7.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
+                    lb7.setIcon(icono);
+                }
+                break;
+            case "21":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
+                    lb8.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
+                    lb8.setIcon(icono);
+                }
+                break;
+            case "22":
+                if(!val.equals("X")){
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
+                            .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
+                    lb9.setIcon(icono);
+                }else{
+                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
+                            .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
+                    lb9.setIcon(icono);
+                }
+                break;
+        }
+    }
+    /**
+     * Metodo que concatena la columna iy fila
+     * @param columna
+     * @param fila
+     * @return
+     */
+    public String consultaPosicion(int columna, int fila){
+        String opc = String.valueOf(columna)+String.valueOf(fila);
+        return opc;
+    }
     /**
      * Carga los nombres de los jugadores a los jLabels
      */
-    private void cargaJugadores(){
+    private void cargaNewJugadores(){
         lbJugador1.setText(jugadores[0]);
         lbJugador2.setText(jugadores[1]);
         jugMoviendo=ganador.RigaInicioPartida(lbJugador1.getText(), lbJugador2.getText());
@@ -100,6 +239,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         lb7.setIcon(null);
         lb8.setIcon(null);
         lb9.setIcon(null);
+        jugMoviendo="";
         limpiaMatriz();
     }
     /**
@@ -116,6 +256,8 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             jugadores[0]="";
             jugadores[1]="";
         }
+        Principal.consultaPartidaPendiente();
+        this.dispose();
     }
     /**
      * Metodo que envia los datos de la matriz y los jugadores a la ventana principal
@@ -124,7 +266,8 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         Principal.matrizJuegoPendiente=matrizJuego;
         Principal.listaJugadores[0]=jugadores[0];
         Principal.listaJugadores[1]=jugadores[1];
-        Principal.cargaObjetos();
+        Principal.jugMoviendo=jugMoviendo;
+        //Principal.cargaObjetos();
     }
     /**
      * This method is called from within the constructor to initialize the form.

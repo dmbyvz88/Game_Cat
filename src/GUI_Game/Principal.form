@@ -111,7 +111,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btEstadistica" alignment="0" max="32767" attributes="0"/>
                           <Component id="btNew" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btNextGame" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btPendingGame" alignment="0" max="32767" attributes="0"/>
                           <Component id="btListGamer" alignment="0" max="32767" attributes="0"/>
                           <Component id="btSalir" max="32767" attributes="0"/>
                       </Group>
@@ -125,7 +125,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btNew" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btNextGame" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btPendingGame" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btListGamer" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -147,12 +147,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btNewActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btNextGame">
+            <Component class="javax.swing.JButton" name="btPendingGame">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Continuar Juego"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btNextGameActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPendingGameActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>

@@ -21,6 +21,7 @@ public class Principal extends javax.swing.JFrame {
     static ConsultaEstadoJuego  CEJ=new ConsultaEstadoJuego();
     public static String[] listaJugadores;
     public static String [][] matrizJuegoPendiente = new String [3][3];
+    public static String jugMoviendo;//Esta variable indica cual jugador tiene que mover en este momento
     /**
      * Creates new form Principal
      */
@@ -33,15 +34,16 @@ public class Principal extends javax.swing.JFrame {
      * algunos objetos del menú
      */
     public static void cargaObjetos(){
+        CEJ.limpiaMatriz(matrizJuegoPendiente);
         if(!CEJ.validacionMatriz(matrizJuegoPendiente)){
-            btNextGame.setEnabled(false);
+            btPendingGame.setEnabled(false);
             if(estadJugadores.esVacia()){
                 desactivaObjetos();
             }else{
                 activaObjetos();
             }
         }else{
-            btNextGame.setEnabled(true);
+            btPendingGame.setEnabled(true);
             activaObjetos();
         }
     }
@@ -69,7 +71,7 @@ public class Principal extends javax.swing.JFrame {
                 estadJugadores=this.validaInicioJuego.menuIngresoJuego(estadJugadores);
                 if(estadJugadores != null && !"".equals(listaJugadores[0]) && !"".equals(listaJugadores[1])
                         && listaJugadores[0]!=null && listaJugadores[1]!=null){
-                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores);
+                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
                     jDesktopPane1.add(ven);
                     ven.setVisible(true);
                 }else{
@@ -81,14 +83,13 @@ public class Principal extends javax.swing.JFrame {
             case 2:
                 if(CEJ.validacionMatriz(matrizJuegoPendiente) 
                         && YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea reanudar el juego anterior?.")){
-                        Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores);
+                        Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
                         jDesktopPane1.add(ven);
                         ven.setVisible(true);
-                        cargaPartidaAnterior();
                 }else{
                     estadJugadores=this.validaInicioJuego.menuIngresoJuego(estadJugadores);
                     if(estadJugadores != null){
-                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores);
+                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
                     jDesktopPane1.add(ven);
                     ven.setVisible(true);
                 }
@@ -101,9 +102,6 @@ public class Principal extends javax.swing.JFrame {
                 break;
         }
     }
-    private void cargaPartidaAnterior(){
-        
-    }
     /**
      * Carga lista de jugadores en un string
      */
@@ -113,6 +111,16 @@ public class Principal extends javax.swing.JFrame {
             jugadores+= lista[i] + "\n";
         }
         return jugadores;
+    }
+    /**
+     * Metodo que permite activar el boton del juego anterior
+     */
+    public static void consultaPartidaPendiente(){
+        if(CEJ.validacionMatriz(matrizJuegoPendiente)){
+            btPendingGame.setEnabled(true);
+        }else{
+            btPendingGame.setEnabled(false);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,7 +135,7 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
         btNew = new javax.swing.JButton();
-        btNextGame = new javax.swing.JButton();
+        btPendingGame = new javax.swing.JButton();
         btListGamer = new javax.swing.JButton();
         btEstadistica = new javax.swing.JButton();
         btSalir = new javax.swing.JButton();
@@ -157,10 +165,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btNextGame.setText("Continuar Juego");
-        btNextGame.addActionListener(new java.awt.event.ActionListener() {
+        btPendingGame.setText("Continuar Juego");
+        btPendingGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btNextGameActionPerformed(evt);
+                btPendingGameActionPerformed(evt);
             }
         });
 
@@ -194,7 +202,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btEstadistica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btNextGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btPendingGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btListGamer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -205,7 +213,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btNew, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btNextGame, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btPendingGame, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btListGamer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -259,9 +267,9 @@ public class Principal extends javax.swing.JFrame {
         menu(1);
     }//GEN-LAST:event_btNewActionPerformed
 
-    private void btNextGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextGameActionPerformed
+    private void btPendingGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPendingGameActionPerformed
         menu(2);
-    }//GEN-LAST:event_btNextGameActionPerformed
+    }//GEN-LAST:event_btPendingGameActionPerformed
 
     private void btListGamerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListGamerActionPerformed
         menu(3);
@@ -314,7 +322,7 @@ public class Principal extends javax.swing.JFrame {
     private static javax.swing.JButton btEstadistica;
     private static javax.swing.JButton btListGamer;
     private javax.swing.JButton btNew;
-    private static javax.swing.JButton btNextGame;
+    private static javax.swing.JButton btPendingGame;
     private javax.swing.JButton btSalir;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JPanel jPanel1;

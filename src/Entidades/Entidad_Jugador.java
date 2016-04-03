@@ -17,6 +17,7 @@ public class Entidad_Jugador {
     /**
      * Método que captura el nombre del jugador
      * @param jugador
+     * @param letra
      */
     public Entidad_Jugador(String jugador){
         this.nombre=jugador;
