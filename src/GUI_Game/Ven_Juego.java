@@ -124,6 +124,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         Principal.matrizJuegoPendiente=matrizJuego;
         Principal.listaJugadores[0]=jugadores[0];
         Principal.listaJugadores[1]=jugadores[1];
+        Principal.cargaObjetos();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -500,15 +501,15 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel lb1;
-    private javax.swing.JLabel lb2;
-    private javax.swing.JLabel lb3;
-    private javax.swing.JLabel lb4;
-    private javax.swing.JLabel lb5;
-    private javax.swing.JLabel lb6;
-    private javax.swing.JLabel lb7;
-    private javax.swing.JLabel lb8;
-    private javax.swing.JLabel lb9;
+    public static javax.swing.JLabel lb1;
+    public static javax.swing.JLabel lb2;
+    public static javax.swing.JLabel lb3;
+    public static javax.swing.JLabel lb4;
+    public static javax.swing.JLabel lb5;
+    public static javax.swing.JLabel lb6;
+    public static javax.swing.JLabel lb7;
+    public static javax.swing.JLabel lb8;
+    public static javax.swing.JLabel lb9;
     public static javax.swing.JLabel lbJugador1;
     public static javax.swing.JLabel lbJugador2;
     // End of variables declaration//GEN-END:variables

@@ -15,7 +15,6 @@ public class ConsultaEstadoJuego {
      * @return
      */
     public boolean consultaEstadoJuego(String [][] matriz){
-        imprimeMatriz(matriz);
         if(consultaColumnas(matriz)){
             return true;
         }else if(consultaFilas(matriz)){
@@ -97,18 +96,6 @@ public class ConsultaEstadoJuego {
         }else{
             return false;
         }
-    } 
-    /**
-     * Metodo que permite imprimir todos lo valores correspondientes a la matriz
-     * @param matriz
-     */
-    private void imprimeMatriz(String [][] matriz){
-        for(int i=0; i < matriz.length; i++){
-            for(int j=0; j < matriz.length; j++){
-                System.out.print(matriz[i][j]);
-            }
-            System.out.println();
-        }
     }
     /**
      * Metodo que permite limpiar los datos que se encuentran almacenados en la matriz
@@ -143,5 +130,36 @@ public class ConsultaEstadoJuego {
             }
         }
         return validez;
+    }
+
+    /**
+     * Recorre la matriz y suma cuando se repite algun dato
+     * @param matriz
+     * @return
+     */
+    public int cuentaJugadas(String [][] matriz){
+        String jugador="";
+        int x=0,o=0;
+        for(int i=0; i<matriz.length; i++){
+            for(int j=0; j<matriz.length; j++){
+                if("X".equals(matriz[i][j])){
+                    x++;
+                }else{
+                    o++;
+                }
+            }
+        }
+        return comparaUltimoJugador(x,o);
+    }
+    /**
+     * Compara cual de las variable es mayor
+     * @return 1 si es mayor la x y 0 si es mayor o
+     */
+    private int comparaUltimoJugador(int x, int o){
+        if(x>0){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

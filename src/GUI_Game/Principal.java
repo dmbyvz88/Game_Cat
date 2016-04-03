@@ -16,9 +16,9 @@ import static javax.swing.JOptionPane.YES_OPTION;
  * @author Diego
  */
 public class Principal extends javax.swing.JFrame {
-    public Lista_Jugadores estadJugadores = new Lista_Jugadores();
+    public static Lista_Jugadores estadJugadores = new Lista_Jugadores();
     AccesoListaJuego validaInicioJuego = new AccesoListaJuego(estadJugadores);
-    ConsultaEstadoJuego CEJ=new ConsultaEstadoJuego();
+    static ConsultaEstadoJuego  CEJ=new ConsultaEstadoJuego();
     public static String[] listaJugadores;
     public static String [][] matrizJuegoPendiente = new String [3][3];
     /**
@@ -32,7 +32,7 @@ public class Principal extends javax.swing.JFrame {
      * Metodo que valida si hay juego pendiente o si hay jugadores registrados, para habilitar o deshabilitar
      * algunos objetos del menú
      */
-    private void cargaObjetos(){
+    public static void cargaObjetos(){
         if(!CEJ.validacionMatriz(matrizJuegoPendiente)){
             btNextGame.setEnabled(false);
             if(estadJugadores.esVacia()){
@@ -48,14 +48,14 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Deshabilida algunos objetos del menú
      */
-    public void desactivaObjetos(){        
+    public static void desactivaObjetos(){        
         btListGamer.setEnabled(false);
         btEstadistica.setEnabled(false);
     }
     /**
      * Habilida algunos objetos del menú
      */
-    public void activaObjetos(){
+    public static void activaObjetos(){
         btListGamer.setEnabled(true);
         btEstadistica.setEnabled(true);
     }
@@ -84,6 +84,7 @@ public class Principal extends javax.swing.JFrame {
                         Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores);
                         jDesktopPane1.add(ven);
                         ven.setVisible(true);
+                        cargaPartidaAnterior();
                 }else{
                     estadJugadores=this.validaInicioJuego.menuIngresoJuego(estadJugadores);
                     if(estadJugadores != null){
@@ -99,6 +100,9 @@ public class Principal extends javax.swing.JFrame {
                         + muestaListaJugadores(listaJugadores));
                 break;
         }
+    }
+    private void cargaPartidaAnterior(){
+        
     }
     /**
      * Carga lista de jugadores en un string
@@ -307,10 +311,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btEstadistica;
-    private javax.swing.JButton btListGamer;
+    private static javax.swing.JButton btEstadistica;
+    private static javax.swing.JButton btListGamer;
     private javax.swing.JButton btNew;
-    private javax.swing.JButton btNextGame;
+    private static javax.swing.JButton btNextGame;
     private javax.swing.JButton btSalir;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JPanel jPanel1;
