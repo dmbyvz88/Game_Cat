@@ -23,18 +23,13 @@ public class AccesoListaJuego {
         this.estadJugadores=lista;
     }
     /**
-     * Despliega en menú de opciones según la selección realizada previamente
+     * Metodo que carga jugadores nuevos a la lista
      * @param lista
      * @return
      */
-    public Lista_Jugadores menuIngresoJuego(Lista_Jugadores lista){
-        if(lista!=null && YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea seleccionar un jugador ya existente?.")){
-            lista.insertaNodoJugador(jugadores[0]);
-            lista.insertaNodoJugador(jugadores[1]=JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
-        }else{
-            lista.insertaNodoJugador(jugadores[0]=JOptionPane.showInputDialog("Nombre del primer Jugador: "));
-            lista.insertaNodoJugador(jugadores[1]=JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
-        }
+    public Lista_Jugadores ingresoJugadoresNews(Lista_Jugadores lista){
+        lista.insertaNodoJugador(jugadores[0]=JOptionPane.showInputDialog("Nombre del primer Jugador: "));
+        lista.insertaNodoJugador(jugadores[1]=JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
         Principal.listaJugadores=jugadores;
         return lista;
     }

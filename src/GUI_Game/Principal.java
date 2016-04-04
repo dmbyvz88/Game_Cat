@@ -68,15 +68,14 @@ public class Principal extends javax.swing.JFrame {
     private void menu(int opc){
         switch(opc){
             case 1://Registra los Jugadores que desean jugar
-                estadJugadores=this.validaInicioJuego.menuIngresoJuego(estadJugadores);
-                if(estadJugadores != null && !"".equals(listaJugadores[0]) && !"".equals(listaJugadores[1])
-                        && listaJugadores[0]!=null && listaJugadores[1]!=null){
-                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
-                    jDesktopPane1.add(ven);
-                    ven.setVisible(true);
+                if(estadJugadores.esVacia()){
+                    cargarJugadoresNews();
+                }else if(YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea seleccionar los jugadores de la "
+                        + "lista existente?.")){
+                    cargaJDSeleccionadorJugadores();
+                    cargaCombosJugadores();
                 }else{
-                    JOptionPane.showMessageDialog(null, "No se puede carga el juego por que los jugadores registrados"
-                            + "\n no está ingresados correctamente, favor verificar su ingreso.");
+                    cargarJugadoresNews();
                 }
                 cargaObjetos();
                 break;
@@ -86,13 +85,6 @@ public class Principal extends javax.swing.JFrame {
                         Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
                         jDesktopPane1.add(ven);
                         ven.setVisible(true);
-                }else{
-                    estadJugadores=this.validaInicioJuego.menuIngresoJuego(estadJugadores);
-                    if(estadJugadores != null){
-                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
-                    jDesktopPane1.add(ven);
-                    ven.setVisible(true);
-                }
                 }
                 break;
             case 3:
@@ -101,6 +93,39 @@ public class Principal extends javax.swing.JFrame {
                         + muestaListaJugadores(listaJugadores));
                 break;
         }
+    }
+
+    /**
+     * Metodo que permite cargar en los combos la lista de jugadores
+     */
+    private void cargaCombosJugadores(){
+        listaJugadores=estadJugadores.mostrarListaJugadores();
+        for(int i=0; i<listaJugadores.length;i++){
+            cbJugador1.addItem(listaJugadores[i]);
+            cbJugador2.addItem(listaJugadores[i]);
+        }
+    }
+    /**
+     *
+     */
+    private void cargarJugadoresNews(){
+        estadJugadores=this.validaInicioJuego.ingresoJugadoresNews(estadJugadores);
+        if(estadJugadores != null && !"".equals(listaJugadores[0]) && !"".equals(listaJugadores[1])
+            && listaJugadores[0]!=null && listaJugadores[1]!=null){
+            Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
+            jDesktopPane1.add(ven);
+            ven.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "No se puede carga el juego por que los jugadores registrados"
+                + "\n no está ingresados correctamente, favor verificar su ingreso.");
+        }
+    }
+    /**
+     * Metodo que permite cargar la ventana para seleccionar los jugadores de la lista existente
+     */
+    private void cargaJDSeleccionadorJugadores(){
+        jdSelecJugadores.setSize(510,140); 
+        jdSelecJugadores.setVisible(true);
     }
     /**
      * Carga lista de jugadores en un string
@@ -134,7 +159,7 @@ public class Principal extends javax.swing.JFrame {
         jdSelecJugadores = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         cbJugador1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btAceptar = new javax.swing.JButton();
         cbJugador2 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -149,7 +174,12 @@ public class Principal extends javax.swing.JFrame {
 
         jdSelecJugadores.setTitle("Seleccionador de Jugadores");
 
-        jButton1.setText("Aceptar");
+        btAceptar.setText("Aceptar");
+        btAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAceptarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Jugador 1");
 
@@ -169,7 +199,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(cbJugador2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btAceptar)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -182,7 +212,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(btAceptar)
                     .addComponent(cbJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -338,8 +368,23 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btEstadisticaActionPerformed
 
     private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btSalirActionPerformed
+
+    private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
+        if (cbJugador1.getSelectedIndex() > -1 && cbJugador2.getSelectedIndex()>-1) {
+                if(!cbJugador1.getSelectedItem().toString().equals(cbJugador2.getSelectedItem().toString())){
+                    listaJugadores[0]=cbJugador1.getSelectedItem().toString();
+                    listaJugadores[1]=cbJugador2.getSelectedItem().toString();
+                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
+                    jDesktopPane1.add(ven);
+                    ven.setVisible(true);
+                    jdSelecJugadores.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe de elegir jugadores diferentes.");
+                }
+        }
+    }//GEN-LAST:event_btAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,6 +422,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAceptar;
     private static javax.swing.JButton btEstadistica;
     private static javax.swing.JButton btListGamer;
     private javax.swing.JButton btNew;
@@ -384,7 +430,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btSalir;
     private javax.swing.JComboBox<String> cbJugador1;
     private javax.swing.JComboBox<String> cbJugador2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

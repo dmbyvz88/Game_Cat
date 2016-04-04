@@ -93,4 +93,24 @@ public class Lista_Jugadores {
         }
         return jugadores;
     }
+    /**
+     * Metodo que permite mostrar la lista de los jugadores
+     * @param jugador
+     * @return 
+     */
+    public String mostrarJugador(String jugador){
+        String encontrado="";
+        if(!esVacia()){
+            Entidad_Jugador temporal=primero;
+            while(temporal!=null){
+                if(temporal.getJugador().equals(jugador)){
+                    encontrado=temporal.getJugador();
+                    temporal=temporal.siguiente;
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay Jugadores registrados.");
+        }
+        return encontrado;
+    }
 }
