@@ -6,7 +6,6 @@
 package GUI_Game;
 
 import Class.ConsultaEstadoJuego;
-import Class.Imagen;
 import Class.RigaInicioPartida;
 import java.awt.Color;
 import java.awt.Image;
@@ -22,7 +21,6 @@ import static javax.swing.JOptionPane.YES_OPTION;
 public class Ven_Juego extends javax.swing.JInternalFrame {
     public String [][] matrizJuego = new String[3][3];
     RigaInicioPartida ganador = new RigaInicioPartida();
-    Imagen imagen;
     public String [] jugadores;
     String jugMoviendo;//Esta variable indica cual jugador tiene que mover en este momento
     ConsultaEstadoJuego estaGame = new ConsultaEstadoJuego();
@@ -42,6 +40,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             cargaJuegoAnterior();
         }else{
             cargaNewJugadores();
+            limpiaMatrizJuego();
         }
     }
     /**
@@ -65,104 +64,69 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      * @param fila
      */
     public void asignaImagenes(String val, int columna, int fila){
-        switch(consultaPosicion(columna, fila)){
+        String opc=consultaPosicion(columna, fila);
+        switch(opc){
             case "00":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
-                    lb1.setIcon(icono);
+                    lb1.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
-                    lb1.setIcon(icono);
+                    lb1.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
             case "01":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
-                    lb2.setIcon(icono);
+                    lb2.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
-                    lb2.setIcon(icono);
+                    lb2.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
             case "02":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
-                    lb3.setIcon(icono);
+                    lb3.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
-                    lb3.setIcon(icono);
+                    lb3.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
             case "10":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
-                    lb4.setIcon(icono);
+                    lb4.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
-                    lb4.setIcon(icono);
+                    lb4.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
             case "11":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
-                    lb5.setIcon(icono);
+                    lb5.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
-                    lb5.setIcon(icono);
+                    lb5.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
             case "12":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
-                    lb6.setIcon(icono);
+                    lb6.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
-                    lb6.setIcon(icono);
+                    lb6.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
             case "20":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
-                    lb7.setIcon(icono);
+                    lb7.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
-                    lb7.setIcon(icono);
+                    lb7.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
             case "21":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
-                    lb8.setIcon(icono);
+                    lb8.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
-                    lb8.setIcon(icono);
+                    lb8.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
             case "22":
                 if(!val.equals("X")){
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                            .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
-                    lb9.setIcon(icono);
+                    lb9.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
                 }else{
-                    Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                            .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
-                    lb9.setIcon(icono);
+                    lb9.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
                 }
                 break;
         }
@@ -230,15 +194,15 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      * Metodo que permite limpiar los objetos y la matriz del juego
      */
     private void limpiaMatrizJuego(){
-        lb1.setIcon(null);
-        lb2.setIcon(null);
-        lb3.setIcon(null);
-        lb4.setIcon(null);
-        lb5.setIcon(null);
-        lb6.setIcon(null);
-        lb7.setIcon(null);
-        lb8.setIcon(null);
-        lb9.setIcon(null);
+        lb1.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
+        lb2.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
+        lb3.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
+        lb4.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
+        lb5.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
+        lb6.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
+        lb7.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
+        lb8.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
+        lb9.setIcon(new ImageIcon(getClass().getResource("/Picture/cat-icon64bits.png")));
         jugMoviendo="";
         limpiaMatriz();
     }
@@ -368,41 +332,41 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lb7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(lb4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lb1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(lb4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lb5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(lb2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lb2, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(lb5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lb8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lb3, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(lb6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb6, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(lb3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lb9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lb2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(lb3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lb1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(lb2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lb6, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(lb4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lb4, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(lb5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lb7, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(lb8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb8, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(lb7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lb9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 153, 255))));
@@ -466,20 +430,20 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 53, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btSalirPartida)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,147 +454,129 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb1MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
-            lb1.setIcon(icono);
-            matrizJuego[0][0]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb1.getWidth(), lb1.getHeight(), Image.SCALE_DEFAULT));
-            lb1.setIcon(icono);
-            matrizJuego[0][0]="X";
+        if("".equals(matrizJuego[0][0])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb1.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[0][0]="O";
+            }else{
+                lb1.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[0][0]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb1MouseClicked
 
     private void lb2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb2MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
-            lb2.setIcon(icono);
-            matrizJuego[0][1]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb2.getWidth(), lb2.getHeight(), Image.SCALE_DEFAULT));
-            lb2.setIcon(icono);
-            matrizJuego[0][1]="X";
+        if("".equals(matrizJuego[0][1])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb2.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[0][1]="O";
+            }else{
+                lb2.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[0][1]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb2MouseClicked
 
     private void lb3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb3MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
-            lb3.setIcon(icono);
-            matrizJuego[0][2]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb3.getWidth(), lb3.getHeight(), Image.SCALE_DEFAULT));
-            lb3.setIcon(icono);
-            matrizJuego[0][2]="X";
+        if("".equals(matrizJuego[0][2])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb3.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[0][2]="O";
+            }else{
+                lb3.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[0][2]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb3MouseClicked
 
     private void lb4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb4MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
-            lb4.setIcon(icono);
-            matrizJuego[1][0]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb4.getWidth(), lb4.getHeight(), Image.SCALE_DEFAULT));
-            lb4.setIcon(icono);
-            matrizJuego[1][0]="X";
+        if("".equals(matrizJuego[1][0])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb4.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[1][0]="O";
+            }else{
+                lb4.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[1][0]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb4MouseClicked
 
     private void lb5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb5MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
-            lb5.setIcon(icono);
-            matrizJuego[1][1]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb5.getWidth(), lb5.getHeight(), Image.SCALE_DEFAULT));
-            lb5.setIcon(icono);
-            matrizJuego[1][1]="X";
+        if("".equals(matrizJuego[1][1])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb5.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[1][1]="O";
+            }else{
+                lb5.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[1][1]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb5MouseClicked
 
     private void lb6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb6MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
-            lb6.setIcon(icono);
-            matrizJuego[1][2]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb6.getWidth(), lb6.getHeight(), Image.SCALE_DEFAULT));
-            lb6.setIcon(icono);
-            matrizJuego[1][2]="X";
+        if("".equals(matrizJuego[1][2])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb6.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[1][2]="O";
+            }else{
+                lb6.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[1][2]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb6MouseClicked
 
     private void lb7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb7MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
-            lb7.setIcon(icono);
-            matrizJuego[2][0]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb7.getWidth(), lb7.getHeight(), Image.SCALE_DEFAULT));
-            lb7.setIcon(icono);
-            matrizJuego[2][0]="X";
+        if("".equals(matrizJuego[2][0])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb7.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[2][0]="O";
+            }else{
+                lb7.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[2][0]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb7MouseClicked
 
     private void lb8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb8MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
-            lb8.setIcon(icono);
-            matrizJuego[2][1]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb8.getWidth(), lb8.getHeight(), Image.SCALE_DEFAULT));
-            lb8.setIcon(icono);
-            matrizJuego[2][1]="X";
+        if("".equals(matrizJuego[2][1])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb8.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[2][1]="O";
+            }else{
+                lb8.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[2][1]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb8MouseClicked
 
     private void lb9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb9MouseClicked
-        if(!jugMoviendo.equals(lbJugador1.getText())){
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/o64bits.png"))
-                    .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
-            lb9.setIcon(icono);
-            matrizJuego[2][2]="O";
-        }else{
-            Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/Picture/x64bits.png"))
-                    .getImage().getScaledInstance(lb9.getWidth(), lb9.getHeight(), Image.SCALE_DEFAULT));
-            lb9.setIcon(icono);
-            matrizJuego[2][2]="X";
+        if("".equals(matrizJuego[2][2])){
+            if(!jugMoviendo.equals(lbJugador1.getText())){
+                lb9.setIcon(new ImageIcon(getClass().getResource("/Picture/o128bits.png")));
+                matrizJuego[2][2]="O";
+            }else{
+                lb9.setIcon(new ImageIcon(getClass().getResource("/Picture/x128bits.png")));
+                matrizJuego[2][2]="X";
+            }
+            resultadoGame();
+            cambioJugador();
         }
-        resultadoGame();
-        cambioJugador();
     }//GEN-LAST:event_lb9MouseClicked
 
     private void btSalirPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirPartidaActionPerformed

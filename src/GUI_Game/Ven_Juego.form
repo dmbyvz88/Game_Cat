@@ -22,7 +22,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -64,13 +64,13 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="20" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" pref="53" max="32767" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btSalirPartida" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -92,24 +92,24 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lb7" alignment="0" pref="118" max="32767" attributes="0"/>
-                          <Component id="lb4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lb1" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lb1" pref="128" max="32767" attributes="0"/>
+                          <Component id="lb4" max="32767" attributes="0"/>
+                          <Component id="lb7" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lb5" alignment="0" pref="118" max="32767" attributes="0"/>
-                          <Component id="lb2" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lb2" alignment="0" pref="128" max="32767" attributes="0"/>
+                          <Component id="lb5" max="32767" attributes="0"/>
                           <Component id="lb8" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lb3" pref="118" max="32767" attributes="0"/>
-                          <Component id="lb6" max="32767" attributes="0"/>
+                          <Component id="lb6" pref="128" max="32767" attributes="0"/>
+                          <Component id="lb3" max="32767" attributes="0"/>
                           <Component id="lb9" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -118,23 +118,23 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lb2" pref="118" max="32767" attributes="0"/>
-                          <Component id="lb3" max="32767" attributes="0"/>
-                          <Component id="lb1" max="32767" attributes="0"/>
+                          <Component id="lb1" pref="128" max="32767" attributes="0"/>
+                          <Component id="lb2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lb3" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lb6" pref="118" max="32767" attributes="0"/>
-                          <Component id="lb4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lb5" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lb4" alignment="0" pref="128" max="32767" attributes="0"/>
+                          <Component id="lb5" max="32767" attributes="0"/>
+                          <Component id="lb6" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lb7" pref="118" max="32767" attributes="0"/>
-                          <Component id="lb8" max="32767" attributes="0"/>
+                          <Component id="lb8" pref="128" max="32767" attributes="0"/>
+                          <Component id="lb7" max="32767" attributes="0"/>
                           <Component id="lb9" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="56" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

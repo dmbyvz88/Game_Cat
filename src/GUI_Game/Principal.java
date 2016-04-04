@@ -81,7 +81,7 @@ public class Principal extends javax.swing.JFrame {
                 cargaObjetos();
                 break;
             case 2:
-                if(CEJ.validacionMatriz(matrizJuegoPendiente) 
+                if(CEJ.validacionMatriz(matrizJuegoPendiente)
                         && YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea reanudar el juego anterior?.")){
                         Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
                         jDesktopPane1.add(ven);
@@ -131,6 +131,13 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jdSelecJugadores = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        cbJugador1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        cbJugador2 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
@@ -139,6 +146,57 @@ public class Principal extends javax.swing.JFrame {
         btListGamer = new javax.swing.JButton();
         btEstadistica = new javax.swing.JButton();
         btSalir = new javax.swing.JButton();
+
+        jdSelecJugadores.setTitle("Seleccionador de Jugadores");
+
+        jButton1.setText("Aceptar");
+
+        jLabel1.setText("Jugador 1");
+
+        jLabel2.setText("Jugador 2");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(cbJugador1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbJugador2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(cbJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jdSelecJugadoresLayout = new javax.swing.GroupLayout(jdSelecJugadores.getContentPane());
+        jdSelecJugadores.getContentPane().setLayout(jdSelecJugadoresLayout);
+        jdSelecJugadoresLayout.setHorizontalGroup(
+            jdSelecJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jdSelecJugadoresLayout.setVerticalGroup(
+            jdSelecJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -324,8 +382,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btNew;
     private static javax.swing.JButton btPendingGame;
     private javax.swing.JButton btSalir;
+    private javax.swing.JComboBox<String> cbJugador1;
+    private javax.swing.JComboBox<String> cbJugador2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JDialog jdSelecJugadores;
     // End of variables declaration//GEN-END:variables
 }

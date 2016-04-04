@@ -8,6 +8,7 @@ package Class;
 import GUI_Game.Principal;
 import Listas.Lista_Jugadores;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_OPTION;
 
 /**
  *
@@ -27,8 +28,13 @@ public class AccesoListaJuego {
      * @return
      */
     public Lista_Jugadores menuIngresoJuego(Lista_Jugadores lista){
-        lista.insertaNodoJugador(jugadores[0]=JOptionPane.showInputDialog("Nombre del primer Jugador: "));
-        lista.insertaNodoJugador(jugadores[1]=JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
+        if(lista!=null && YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea seleccionar un jugador ya existente?.")){
+            lista.insertaNodoJugador(jugadores[0]);
+            lista.insertaNodoJugador(jugadores[1]=JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
+        }else{
+            lista.insertaNodoJugador(jugadores[0]=JOptionPane.showInputDialog("Nombre del primer Jugador: "));
+            lista.insertaNodoJugador(jugadores[1]=JOptionPane.showInputDialog("Nombre del segundo Jugador: "));
+        }
         Principal.listaJugadores=jugadores;
         return lista;
     }
