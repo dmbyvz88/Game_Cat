@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Class;
+package Class_Logic;
 /**
  *
  * @author Diego
@@ -14,7 +14,7 @@ public class ConsultaEstadoJuego {
      * @param matriz
      * @return
      */
-    public boolean consultaEstadoJuego(String [][] matriz){
+    public boolean consultaEstadoMatrizJuego(String [][] matriz){
         if(consultaColumnas(matriz)){
             return true;
         }else if(consultaFilas(matriz)){

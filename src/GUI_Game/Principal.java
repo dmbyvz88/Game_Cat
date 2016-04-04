@@ -5,8 +5,10 @@
  */
 package GUI_Game;
 
-import Class.AccesoListaJuego;
-import Class.ConsultaEstadoJuego;
+import Class_Logic.AccesoListaJuego;
+import Class_Logic.Acceso_Estadisticas_Jugadores;
+import Class_Logic.ConsultaEstadoJuego;
+import Listas.Lista_Estadisticas_Game;
 import Listas.Lista_Jugadores;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_OPTION;
@@ -16,10 +18,13 @@ import static javax.swing.JOptionPane.YES_OPTION;
  * @author Diego
  */
 public class Principal extends javax.swing.JFrame {
-    public static Lista_Jugadores estadJugadores = new Lista_Jugadores();
-    AccesoListaJuego validaInicioJuego = new AccesoListaJuego(estadJugadores);
-    static ConsultaEstadoJuego  CEJ=new ConsultaEstadoJuego();
     public static String[] listaJugadores;
+    public static Lista_Jugadores estadJugadores = new Lista_Jugadores();
+    public static Lista_Estadisticas_Game LEG = new Lista_Estadisticas_Game();
+    AccesoListaJuego validaInicioJuego = new AccesoListaJuego(estadJugadores);
+    //Acceso_Estadisticas_Jugadores AEJ = new Acceso_Estadisticas_Jugadores(listaJugadores);
+    static ConsultaEstadoJuego  CEJ=new ConsultaEstadoJuego();
+    
     public static String [][] matrizJuegoPendiente = new String [3][3];
     public static String jugMoviendo;//Esta variable indica cual jugador tiene que mover en este momento
     /**
@@ -82,9 +87,11 @@ public class Principal extends javax.swing.JFrame {
             case 2:
                 if(CEJ.validacionMatriz(matrizJuegoPendiente)
                         && YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea reanudar el juego anterior?.")){
-                        Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
+                        Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG);
                         jDesktopPane1.add(ven);
                         ven.setVisible(true);
+                        JOptionPane.showMessageDialog(null, "El jugador que se encuentre en color Rojo, "
+                    + "\nes al que le corresponde el tuno.");
                 }
                 break;
             case 3:
@@ -94,7 +101,6 @@ public class Principal extends javax.swing.JFrame {
                 break;
         }
     }
-
     /**
      * Metodo que permite cargar en los combos la lista de jugadores
      */
@@ -110,11 +116,14 @@ public class Principal extends javax.swing.JFrame {
      */
     private void cargarJugadoresNews(){
         estadJugadores=this.validaInicioJuego.ingresoJugadoresNews(estadJugadores);
+        //AEJ.
         if(estadJugadores != null && !"".equals(listaJugadores[0]) && !"".equals(listaJugadores[1])
             && listaJugadores[0]!=null && listaJugadores[1]!=null){
-            Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
+            Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG);
             jDesktopPane1.add(ven);
             ven.setVisible(true);
+            JOptionPane.showMessageDialog(null, "El jugador que se encuentre en color Rojo, "
+                    + "\nes al que le corresponde el tuno.");
         }else{
             JOptionPane.showMessageDialog(null, "No se puede carga el juego por que los jugadores registrados"
                 + "\n no está ingresados correctamente, favor verificar su ingreso.");
@@ -236,7 +245,7 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
+            .addGap(0, 602, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +385,7 @@ public class Principal extends javax.swing.JFrame {
                 if(!cbJugador1.getSelectedItem().toString().equals(cbJugador2.getSelectedItem().toString())){
                     listaJugadores[0]=cbJugador1.getSelectedItem().toString();
                     listaJugadores[1]=cbJugador2.getSelectedItem().toString();
-                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo);
+                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG);
                     jDesktopPane1.add(ven);
                     ven.setVisible(true);
                     jdSelecJugadores.dispose();
