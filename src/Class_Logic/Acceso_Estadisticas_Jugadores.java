@@ -14,39 +14,57 @@ import Listas.Lista_Jugadores;
  */
 public class Acceso_Estadisticas_Jugadores {
     private String [] jugadoresActuales;
-    private Lista_Jugadores listaJugadores;
+    //private Lista_Jugadores LJ;
     private Lista_Estadisticas_Game LEG;
+    private Lista_Jugadores LJ;
     /**
      * Metodo que permite obtener la lista de jugadores al los que se les llevará la estadistica
      * @param lista
-     * @param listaJugadores
+     * @param LJ
      * @param LEG
      */
-    public Acceso_Estadisticas_Jugadores(String [] lista, Lista_Jugadores listaJugadores, Lista_Estadisticas_Game LEG){
+    public Acceso_Estadisticas_Jugadores(String [] lista, Lista_Jugadores LJ, Lista_Estadisticas_Game LEG){
         this.jugadoresActuales=lista;
-        this.listaJugadores=listaJugadores;
+        this.LJ=LJ;
         this.LEG=LEG;
     }
     /**
      * Metodo que ingresa inicialmente los datos estadistico de cada usuario en la lista
-     * @param partida
+     * @param estadoPartida
+     * @param jugadorGanador
+     * @param jugadorPerdedor
+     * @param jugadores
      * @return
      */
-    public Lista_Estadisticas_Game menu_Estadisticas_Jugadores(String partida){
-        switch(partida){
+    public Lista_Estadisticas_Game menu_Calcula_Estadisticas_Jugadores(String estadoPartida, String jugadorGanador,
+            String jugadorPerdedor, String[] jugadores){
+        this.jugadoresActuales=jugadores;
+        int [] cantidadesJ1;
+        int [] cantidadesJ2;
+        switch(estadoPartida){
             case "Ganada"://Registra los Jugadores que desean jugar
-                LEG.insertaNodoJugador(this.jugadoresActuales[0], 0, 0, 0);
-                LEG.insertaNodoJugador(this.jugadoresActuales[0], 0, 0, 0);
-                break;
-            case "Perdida":
-                
+                cantidadesJ1=LEG.consultaCantidades(jugadores[0]);
+                cantidadesJ2=LEG.consultaCantidades(jugadores[1]);
+                if(LEG.existenciaJugadorEstadistica(jugadorGanador) && LEG.existenciaJugadorEstadistica(jugadorPerdedor)){
+                    LEG.modificarNodoJugador(jugadorGanador, cantidadesJ1[0]++, cantidadesJ1[1], cantidadesJ1[2]);
+                    LEG.modificarNodoJugador(jugadorPerdedor, cantidadesJ2[0], cantidadesJ2[1]++, cantidadesJ2[2]);
+                }else{
+                    LEG.insertaNodoJugador(jugadorGanador, cantidadesJ1[0]++, cantidadesJ1[1], cantidadesJ1[2]);
+                    LEG.insertaNodoJugador(jugadorPerdedor, cantidadesJ2[0], cantidadesJ2[1]++, cantidadesJ2[2]);
+                }
                 break;
             case "Empatada":
-                
+                cantidadesJ1=LEG.consultaCantidades(this.jugadoresActuales[0]);
+                cantidadesJ2=LEG.consultaCantidades(jugadores[1]);
+                if(LEG.existenciaJugadorEstadistica(jugadorGanador)){
+                    LEG.modificarNodoJugador(jugadorGanador, cantidadesJ1[0], cantidadesJ1[1], cantidadesJ1[2]++);
+                    LEG.modificarNodoJugador(jugadorPerdedor, cantidadesJ2[0], cantidadesJ2[1], cantidadesJ2[2]++);
+                }else{
+                    LEG.insertaNodoJugador(jugadorGanador, cantidadesJ1[0]+1, cantidadesJ1[1], cantidadesJ1[2]++);
+                    LEG.insertaNodoJugador(jugadorPerdedor, cantidadesJ2[0], cantidadesJ2[1], cantidadesJ2[2]++);
+                }
                 break;
         }
-        LEG.insertaNodoJugador(this.jugadoresActuales[0], 0, 0, 0);
-        LEG.insertaNodoJugador(this.jugadoresActuales[0], 0, 0, 0);
         return LEG;
     }
 }

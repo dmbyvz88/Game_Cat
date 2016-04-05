@@ -8,7 +8,6 @@ package Class_Logic;
 import GUI_Game.Principal;
 import Listas.Lista_Jugadores;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.YES_OPTION;
 
 /**
  *

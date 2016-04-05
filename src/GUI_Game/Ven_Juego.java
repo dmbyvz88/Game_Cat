@@ -5,9 +5,11 @@
  */
 package GUI_Game;
 
+import Class_Logic.Acceso_Estadisticas_Jugadores;
 import Class_Logic.ConsultaEstadoJuego;
 import Class_Logic.RigaInicioPartida;
 import Listas.Lista_Estadisticas_Game;
+import Listas.Lista_Jugadores;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -24,6 +26,8 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     String jugMoviendo;//Esta variable indica cual jugador tiene que mover en este momento
     ConsultaEstadoJuego estaGame = new ConsultaEstadoJuego();
     Lista_Estadisticas_Game LEG = new Lista_Estadisticas_Game();
+    Lista_Jugadores LJ = new Lista_Jugadores();
+    Acceso_Estadisticas_Jugadores AEJ = new Acceso_Estadisticas_Jugadores(jugadores, LJ, LEG);
     
     /**
      * Creates new form Ven_Juego
@@ -31,12 +35,15 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      * @param jugadores
      * @param jugMoviendo
      * @param LGE
+     * @param listaJugadores
      */
-    public Ven_Juego(String [][] matrizJuego, String[] jugadores, String jugMoviendo, Lista_Estadisticas_Game LGE) {
+    public Ven_Juego(String [][] matrizJuego, String[] jugadores, String jugMoviendo, Lista_Estadisticas_Game LGE,
+            Lista_Jugadores listaJugadores) {
         this.LEG=LGE;
         this.jugadores=jugadores;
         this.matrizJuego=matrizJuego;
         this.jugMoviendo=jugMoviendo;
+        this.LJ=listaJugadores;
         initComponents();
         ckVistaEstadisticas.setSelected(true);
         muestraEstadistica();
@@ -194,13 +201,66 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
      */
     private void resultadoGame(){
         if(estaGame.consultaEstadoMatrizJuego(matrizJuego)){
-            if(YES_OPTION==JOptionPane.showConfirmDialog(null, "Juego Ganado \n ¿Desea Jugar nuevamente?.")){
+            if(YES_OPTION==JOptionPane.showConfirmDialog(null, "Juego Ganado\n Felicidades "+jugMoviendo
+                    +"\n ¿Desea Jugar nuevamente?.")){
+                Principal.LEG=LEG=AEJ.menu_Calcula_Estadisticas_Jugadores("Ganada", jugMoviendo, consultaJugadorPerdedor(jugMoviendo), jugadores);
                 limpiaMatrizJuego();
+                mostrarEstadistica();
             }else{
                 limpiaMatrizJuego();
                 this.dispose();
             }
+        }else if(isLlenaMatriz()){
+                JOptionPane.showMessageDialog(null, "Partida Empatada, no hay ganador.");
         }
+    }
+    /**
+     * Metodo muestra las estadisticas de los jugadores
+     */
+    private void mostrarEstadistica(){
+        int[] cantidadesJ1 = LEG.consultaCantidades(jugadores[0]);
+        int[] cantidadesJ2 = LEG.consultaCantidades(jugadores[1]);
+        if(lbJugador1.getText().equals(jugadores[0])){
+            lbCantGanadasJ1.setText(String.valueOf(cantidadesJ1[0]));
+            lbCantPerdidasJ1.setText(String.valueOf(cantidadesJ1[1]));
+            lbCantEmpatadasJ1.setText(String.valueOf(cantidadesJ1[2]));
+            lbCantGanadasJ2.setText(String.valueOf(cantidadesJ2[0]));
+            lbCantPerdidasJ2.setText(String.valueOf(cantidadesJ2[1]));
+            lbCantEmpatadasJ2.setText(String.valueOf(cantidadesJ2[2]));
+        }
+    }
+    /**
+     * Metodo que permite consultar cual es el jugador que perdio, ya que se necesita en la estadistica
+     * @param jugadorGanador
+     * @return
+     */
+    private String consultaJugadorPerdedor(String jugadorGanador){
+        String jugadorPerdedor;
+        if(!jugMoviendo.equals(lbJugador1.getText())){
+            jugadorPerdedor=lbJugador1.getText();
+        }else{
+            jugadorPerdedor=lbJugador2.getText();
+        }
+        return jugadorPerdedor;
+    }
+    /**
+     * Metodo que verifica si está o no llena la matríz
+     * @return
+     */
+    private boolean isLlenaMatriz(){
+        boolean vacio=false;
+        int cont=0;
+        for(int i=0; i<matrizJuego.length;i++){
+            for(int j=0; j<matrizJuego.length;j++){
+                if(!matrizJuego[i][j].equals("")){
+                    cont++;
+                }
+            }
+        }
+        if(cont>=9){
+            vacio=true;
+        }
+        return vacio;
     }    
     /**
      * Metodo que permite limpiar los objetos y la matriz del juego
@@ -221,7 +281,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     /**
      * Metodo que permite comprovar si se cerró la ventana y si hay un juego pendiente lo guarda.
      */
-    public void cierreVentana(){
+    private void cierreVentana(){
         if(!estaGame.consultaEstadoMatrizJuego(matrizJuego) && YES_OPTION==JOptionPane.showConfirmDialog(null,"¿Desea guardar la partida actual?")){
             jugadores[0]=lbJugador1.getText();
             jugadores[1]=lbJugador2.getText();
@@ -238,7 +298,7 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     /**
      * Metodo que envia los datos de la matriz y los jugadores a la ventana principal
      */
-    public void envioDatosPrincipal(){
+    private void envioDatosPrincipal(){
         Principal.matrizJuegoPendiente=matrizJuego;
         Principal.listaJugadores[0]=jugadores[0];
         Principal.listaJugadores[1]=jugadores[1];
@@ -246,9 +306,9 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         //Principal.cargaObjetos();
     }
     /**
-     *
+     * Metodo que verifica si el check que muestra la estadisticas esta o no habilitado
      */
-    public void muestraEstadistica(){
+    private void muestraEstadistica(){
         if(ckVistaEstadisticas.isSelected()){
             pEstadisticaJ1.setVisible(true);
             pEstadisticaJ2.setVisible(true);
@@ -284,18 +344,18 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbCantGanadasJ1 = new javax.swing.JLabel();
+        lbCantPerdidasJ1 = new javax.swing.JLabel();
+        lbCantEmpatadasJ1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         lbJugador2 = new javax.swing.JLabel();
         pEstadisticaJ2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lbCantGanadasJ2 = new javax.swing.JLabel();
+        lbCantPerdidasJ2 = new javax.swing.JLabel();
+        lbCantEmpatadasJ2 = new javax.swing.JLabel();
         btSalirPartida = new javax.swing.JButton();
         ckVistaEstadisticas = new javax.swing.JCheckBox();
 
@@ -421,17 +481,17 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Empatadas:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("0");
+        lbCantGanadasJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbCantGanadasJ1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCantGanadasJ1.setText("0");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("0");
+        lbCantPerdidasJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbCantPerdidasJ1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCantPerdidasJ1.setText("0");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("0");
+        lbCantEmpatadasJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbCantEmpatadasJ1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCantEmpatadasJ1.setText("0");
 
         javax.swing.GroupLayout pEstadisticaJ1Layout = new javax.swing.GroupLayout(pEstadisticaJ1);
         pEstadisticaJ1.setLayout(pEstadisticaJ1Layout);
@@ -445,9 +505,9 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pEstadisticaJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbCantGanadasJ1, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                    .addComponent(lbCantPerdidasJ1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbCantEmpatadasJ1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pEstadisticaJ1Layout.setVerticalGroup(
@@ -456,15 +516,15 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pEstadisticaJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(lbCantGanadasJ1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pEstadisticaJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(lbCantPerdidasJ1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pEstadisticaJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel6))
+                    .addComponent(lbCantEmpatadasJ1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -500,17 +560,17 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Empatadas:");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("0");
+        lbCantGanadasJ2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbCantGanadasJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCantGanadasJ2.setText("0");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("0");
+        lbCantPerdidasJ2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbCantPerdidasJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCantPerdidasJ2.setText("0");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("0");
+        lbCantEmpatadasJ2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbCantEmpatadasJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCantEmpatadasJ2.setText("0");
 
         javax.swing.GroupLayout pEstadisticaJ2Layout = new javax.swing.GroupLayout(pEstadisticaJ2);
         pEstadisticaJ2.setLayout(pEstadisticaJ2Layout);
@@ -524,9 +584,9 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pEstadisticaJ2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbCantGanadasJ2, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                    .addComponent(lbCantPerdidasJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbCantEmpatadasJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pEstadisticaJ2Layout.setVerticalGroup(
@@ -535,15 +595,15 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pEstadisticaJ2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel10))
+                    .addComponent(lbCantGanadasJ2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pEstadisticaJ2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel11))
+                    .addComponent(lbCantPerdidasJ2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pEstadisticaJ2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel12))
+                    .addComponent(lbCantEmpatadasJ2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -607,28 +667,32 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btSalirPartida)
-                    .addComponent(ckVistaEstadisticas))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(ckVistaEstadisticas)
+                    .addComponent(btSalirPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ckVistaEstadisticas)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSalirPartida, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ckVistaEstadisticas))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btSalirPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -639,7 +703,9 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -784,14 +850,8 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     private javax.swing.JButton btSalirPartida;
     private javax.swing.JCheckBox ckVistaEstadisticas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -809,6 +869,12 @@ public class Ven_Juego extends javax.swing.JInternalFrame {
     public static javax.swing.JLabel lb7;
     public static javax.swing.JLabel lb8;
     public static javax.swing.JLabel lb9;
+    private javax.swing.JLabel lbCantEmpatadasJ1;
+    private javax.swing.JLabel lbCantEmpatadasJ2;
+    private javax.swing.JLabel lbCantGanadasJ1;
+    private javax.swing.JLabel lbCantGanadasJ2;
+    private javax.swing.JLabel lbCantPerdidasJ1;
+    private javax.swing.JLabel lbCantPerdidasJ2;
     public static javax.swing.JLabel lbJugador1;
     public static javax.swing.JLabel lbJugador2;
     private javax.swing.JPanel pEstadisticaJ1;

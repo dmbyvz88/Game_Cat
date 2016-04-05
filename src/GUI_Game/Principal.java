@@ -6,10 +6,10 @@
 package GUI_Game;
 
 import Class_Logic.AccesoListaJuego;
-import Class_Logic.Acceso_Estadisticas_Jugadores;
 import Class_Logic.ConsultaEstadoJuego;
 import Listas.Lista_Estadisticas_Game;
 import Listas.Lista_Jugadores;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_OPTION;
 
@@ -19,10 +19,10 @@ import static javax.swing.JOptionPane.YES_OPTION;
  */
 public class Principal extends javax.swing.JFrame {
     public static String[] listaJugadores;
-    public static Lista_Jugadores estadJugadores = new Lista_Jugadores();
+    public static Lista_Jugadores LJ = new Lista_Jugadores();
     public static Lista_Estadisticas_Game LEG = new Lista_Estadisticas_Game();
-    AccesoListaJuego validaInicioJuego = new AccesoListaJuego(estadJugadores);
-    //Acceso_Estadisticas_Jugadores AEJ = new Acceso_Estadisticas_Jugadores(listaJugadores);
+    AccesoListaJuego validaInicioJuego = new AccesoListaJuego(LJ);
+   // Acceso_Estadisticas_Jugadores AEJ = new Acceso_Estadisticas_Jugadores(listaJugadores);
     static ConsultaEstadoJuego  CEJ=new ConsultaEstadoJuego();
     
     public static String [][] matrizJuegoPendiente = new String [3][3];
@@ -42,7 +42,7 @@ public class Principal extends javax.swing.JFrame {
         CEJ.limpiaMatriz(matrizJuegoPendiente);
         if(!CEJ.validacionMatriz(matrizJuegoPendiente)){
             btPendingGame.setEnabled(false);
-            if(estadJugadores.esVacia()){
+            if(LJ.esVacia()){
                 desactivaObjetos();
             }else{
                 activaObjetos();
@@ -73,7 +73,7 @@ public class Principal extends javax.swing.JFrame {
     private void menu(int opc){
         switch(opc){
             case 1://Registra los Jugadores que desean jugar
-                if(estadJugadores.esVacia()){
+                if(LJ.esVacia()){
                     cargarJugadoresNews();
                 }else if(YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea seleccionar los jugadores de la "
                         + "lista existente?.")){
@@ -87,7 +87,7 @@ public class Principal extends javax.swing.JFrame {
             case 2:
                 if(CEJ.validacionMatriz(matrizJuegoPendiente)
                         && YES_OPTION==JOptionPane.showConfirmDialog(null, "¿Desea reanudar el juego anterior?.")){
-                        Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG);
+                        Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG, LJ);
                         jDesktopPane1.add(ven);
                         ven.setVisible(true);
                         JOptionPane.showMessageDialog(null, "El jugador que se encuentre en color Rojo, "
@@ -95,9 +95,14 @@ public class Principal extends javax.swing.JFrame {
                 }
                 break;
             case 3:
-                listaJugadores=estadJugadores.mostrarListaJugadores();
+                listaJugadores=LJ.mostrarListaJugadores();
                 JOptionPane.showMessageDialog(null, "Los Jugadores actuales son: \n"
                         + muestaListaJugadores(listaJugadores));
+                break;
+            case 4:
+                jdListaJugadores.setSize(380,120); 
+                jdListaJugadores.setVisible(true);
+                cargaListaCombosJugadores();
                 break;
         }
     }
@@ -105,21 +110,32 @@ public class Principal extends javax.swing.JFrame {
      * Metodo que permite cargar en los combos la lista de jugadores
      */
     private void cargaCombosJugadores(){
-        listaJugadores=estadJugadores.mostrarListaJugadores();
+        listaJugadores=LJ.mostrarListaJugadores();
         for(int i=0; i<listaJugadores.length;i++){
             cbJugador1.addItem(listaJugadores[i]);
             cbJugador2.addItem(listaJugadores[i]);
         }
     }
     /**
-     *
+     * Metodo que permite cargar el combo de la estadistica con la lista de jugadores
+     */
+    private void cargaListaCombosJugadores(){
+        JComboBox temp = new JComboBox();
+        cbListaJugadores.setModel(temp.getModel());
+        listaJugadores=LJ.mostrarListaJugadores();
+        for(int i=0; i<listaJugadores.length;i++){
+            cbListaJugadores.addItem(listaJugadores[i]);
+        }
+    }
+    /**
+     * Metodo que carga los nuevo jugadores
      */
     private void cargarJugadoresNews(){
-        estadJugadores=this.validaInicioJuego.ingresoJugadoresNews(estadJugadores);
-        //AEJ.
-        if(estadJugadores != null && !"".equals(listaJugadores[0]) && !"".equals(listaJugadores[1])
+        LJ=this.validaInicioJuego.ingresoJugadoresNews(LJ);
+       // AEJ.
+        if(LJ != null && !"".equals(listaJugadores[0]) && !"".equals(listaJugadores[1])
             && listaJugadores[0]!=null && listaJugadores[1]!=null){
-            Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG);
+            Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG, LJ);
             jDesktopPane1.add(ven);
             ven.setVisible(true);
             JOptionPane.showMessageDialog(null, "El jugador que se encuentre en color Rojo, "
@@ -172,6 +188,11 @@ public class Principal extends javax.swing.JFrame {
         cbJugador2 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jdListaJugadores = new javax.swing.JDialog();
+        jPanel4 = new javax.swing.JPanel();
+        cbListaJugadores = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
@@ -235,6 +256,53 @@ public class Principal extends javax.swing.JFrame {
         jdSelecJugadoresLayout.setVerticalGroup(
             jdSelecJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jdListaJugadores.setTitle("Lista de Jugadores");
+
+        jLabel3.setText("Lista de Jugadores:");
+
+        jButton1.setText("Consultar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cbListaJugadores, 0, 237, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbListaJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jdListaJugadoresLayout = new javax.swing.GroupLayout(jdListaJugadores.getContentPane());
+        jdListaJugadores.getContentPane().setLayout(jdListaJugadoresLayout);
+        jdListaJugadoresLayout.setHorizontalGroup(
+            jdListaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jdListaJugadoresLayout.setVerticalGroup(
+            jdListaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -385,7 +453,7 @@ public class Principal extends javax.swing.JFrame {
                 if(!cbJugador1.getSelectedItem().toString().equals(cbJugador2.getSelectedItem().toString())){
                     listaJugadores[0]=cbJugador1.getSelectedItem().toString();
                     listaJugadores[1]=cbJugador2.getSelectedItem().toString();
-                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG);
+                    Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG, LJ);
                     jDesktopPane1.add(ven);
                     ven.setVisible(true);
                     jdSelecJugadores.dispose();
@@ -394,6 +462,10 @@ public class Principal extends javax.swing.JFrame {
                 }
         }
     }//GEN-LAST:event_btAceptarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,12 +511,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btSalir;
     private javax.swing.JComboBox<String> cbJugador1;
     private javax.swing.JComboBox<String> cbJugador2;
+    private javax.swing.JComboBox<String> cbListaJugadores;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JDialog jdListaJugadores;
     private javax.swing.JDialog jdSelecJugadores;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,7 @@
 package Listas;
 
 import Entidades.Entidad_Estadistica;
+import Entidades.Entidad_Jugador;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,14 +14,15 @@ import javax.swing.JOptionPane;
  * @author Diego
  */
 public class Lista_Estadisticas_Game {
-    public Entidad_Estadistica primero;
+    public Entidad_Estadistica primeroEstadistica;
+    public Entidad_Jugador primeroJugador;
     int cont;
     /**
      * Metodo que permite identificar si la lista se encuentra vacia o no
      * @return
      */
     public boolean esVacia(){
-        if(primero==null){
+        if(primeroEstadistica==null){
             return true;
         }
         else{
@@ -37,11 +39,11 @@ public class Lista_Estadisticas_Game {
     public void insertaNodoJugador(String nombre, int cantGanadas, int cantPerdidas, int cantEmpatadas){
         Entidad_Estadistica nuevoNodo=new Entidad_Estadistica(nombre, cantGanadas, cantPerdidas, cantEmpatadas);
         if(esVacia()){
-            primero=nuevoNodo;
+            primeroEstadistica=nuevoNodo;
         }
         else{
-            nuevoNodo.siguiente=primero;
-            primero=nuevoNodo;
+            nuevoNodo.siguiente=primeroEstadistica;
+            primeroEstadistica=nuevoNodo;
         }
         cont++;
     }
@@ -53,17 +55,15 @@ public class Lista_Estadisticas_Game {
     public int[] consultaCantidades(String jugador){
         int [] cant= new int[3];
         if(!esVacia()){
-            Entidad_Estadistica temporal=primero;
+            Entidad_Estadistica temporal=primeroEstadistica;
             while(temporal!=null){
                 if(temporal.getJugador().equals(jugador)){
                     cant[0]=temporal.getCantGanado();
                     cant[1]=temporal.getCantPerdido();
                     cant[2]=temporal.getCantEmpatado();
-                    temporal=temporal.siguiente;
                 }
+                temporal=temporal.siguiente;
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "No hay Jugadores registrados.");
         }
         return cant;
     }
@@ -76,17 +76,35 @@ public class Lista_Estadisticas_Game {
      */
     public void modificarNodoJugador(String nombre, int cantGanadas, int cantPerdidas, int cantEmpatadas){
         if(!esVacia()){
-            Entidad_Estadistica temporal=primero;
+            Entidad_Estadistica temporal=primeroEstadistica;
             while(temporal!=null){
                 if(nombre.equals(temporal.getJugador())){
                     temporal.setCantGanado(cantGanadas);
                     temporal.setCantGanado(cantPerdidas);
                     temporal.setCantGanado(cantEmpatadas);
-                    temporal=temporal.siguiente;
                 }
+                temporal=temporal.siguiente;
             }
         }else{
             JOptionPane.showMessageDialog(null, "No hay Jugadores registrados.");
         }
+    }
+    /**
+     * Metodo que consulta si existe o no el jugador
+     * @param nomJugador
+     * @param leg
+     * @return
+     */
+    public boolean existenciaJugadorEstadistica(String nomJugador){
+        boolean existencia = false;
+        Entidad_Estadistica temporal=primeroEstadistica;
+        while(temporal!=null){
+            if(nomJugador.equals(temporal.getJugador())){
+                existencia=true;
+                break;
+            }
+            temporal=temporal.siguiente;
+        }
+        return existencia;
     }
 }

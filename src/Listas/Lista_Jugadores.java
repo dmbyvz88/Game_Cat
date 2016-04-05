@@ -98,18 +98,18 @@ public class Lista_Jugadores {
      * @param jugador
      * @return 
      */
-    public String mostrarJugador(String jugador){
-        String encontrado="";
+    public boolean existenciaJugador(String jugador){
+        boolean encontrado=false;
         if(!esVacia()){
             Entidad_Jugador temporal=primero;
             while(temporal!=null){
                 if(temporal.getJugador().equals(jugador)){
-                    encontrado=temporal.getJugador();
+                    encontrado=true;
+                    break;
+                }else{
                     temporal=temporal.siguiente;
                 }
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "No hay Jugadores registrados.");
         }
         return encontrado;
     }
