@@ -6,7 +6,7 @@
 package GUI_Game;
 
 import Class_Logic.AccesoListaJuego;
-import Class_Logic.ConsultaEstadoJuego;
+import Class_Logic.Tablero_Estado_Juego;
 import Listas.Lista_Estadisticas_Game;
 import Listas.Lista_Jugadores;
 import javax.swing.JComboBox;
@@ -23,7 +23,7 @@ public class Principal extends javax.swing.JFrame {
     public static Lista_Estadisticas_Game LEG = new Lista_Estadisticas_Game();
     AccesoListaJuego validaInicioJuego = new AccesoListaJuego(LJ);
    // Acceso_Estadisticas_Jugadores AEJ = new Acceso_Estadisticas_Jugadores(listaJugadores);
-    static ConsultaEstadoJuego  CEJ=new ConsultaEstadoJuego();
+    static Tablero_Estado_Juego  CEJ=new Tablero_Estado_Juego();
     
     public static String [][] matrizJuegoPendiente = new String [3][3];
     public static String jugMoviendo;//Esta variable indica cual jugador tiene que mover en este momento
@@ -313,7 +313,7 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 602, Short.MAX_VALUE)
+            .addGap(0, 659, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,7 +330,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btPendingGame.setText("Continuar Juego");
+        btPendingGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/carpeta-caticon64bits.png"))); // NOI18N
         btPendingGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPendingGameActionPerformed(evt);
@@ -464,7 +464,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btAceptarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(!"".equals(cbListaJugadores.getSelectedItem().toString())){
+            Ven_Estadistica_Jugador ven = new Ven_Estadistica_Jugador(LEG, 
+                    cbListaJugadores.getSelectedItem().toString());
+            jDesktopPane1.add(ven);
+            ven.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

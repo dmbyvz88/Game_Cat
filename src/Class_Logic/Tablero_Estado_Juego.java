@@ -8,7 +8,7 @@ package Class_Logic;
  *
  * @author Diego
  */
-public class ConsultaEstadoJuego {
+public class Tablero_Estado_Juego {
     /**
      * Metodo que compara los datos de la matriz para identificar si se ha ganado o no el juego
      * @param matriz
@@ -69,16 +69,14 @@ public class ConsultaEstadoJuego {
      * @return
      */
     private boolean consultaDiagonalPrincipal(String [][] m){
+        boolean ganado= false;
         if(!"".equals(m[0][0]) && m[0][0]!=null && !"".equals(m[1][1]) && m[1][1]!=null
                 && !"".equals(m[2][2]) && m[2][2]!=null){
             if(m[0][0].equals(m[1][1]) && m[1][1].equals(m[2][2]) && m[2][2].equals(m[0][0])){
-                return true;
-            }else{
-                return false;
+                ganado = true;
             }
-        }else{
-            return false;
         }
+        return ganado;
     }    
     /**
      * Metodo que permite comparar la diagonal secundaria de la matriz
@@ -86,16 +84,14 @@ public class ConsultaEstadoJuego {
      * @return
      */
     private boolean consultaDiagonalSecundaria(String [][] m){
+        boolean ganado= false;
         if(!"".equals(m[0][2]) && m[0][2]!=null && !"".equals(m[1][1]) && m[1][1]!=null
                 && !"".equals(m[2][0]) && m[2][0]!=null){
             if(m[0][2].equals(m[1][1]) && m[1][1].equals(m[2][0]) && m[2][0].equals(m[0][2])){
-                return true;
-            }else{
-                return false;
+                ganado = true;
             }
-        }else{
-            return false;
         }
+        return ganado;
     }
     /**
      * Metodo que permite limpiar los datos que se encuentran almacenados en la matriz

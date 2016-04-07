@@ -6,7 +6,6 @@
 package Listas;
 
 import Entidades.Entidad_Estadistica;
-import Entidades.Entidad_Jugador;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +14,6 @@ import javax.swing.JOptionPane;
  */
 public class Lista_Estadisticas_Game {
     public Entidad_Estadistica primeroEstadistica;
-    public Entidad_Jugador primeroJugador;
     int cont;
     /**
      * Metodo que permite identificar si la lista se encuentra vacia o no
@@ -32,12 +30,10 @@ public class Lista_Estadisticas_Game {
     /**
      * Metodo que permite recolectar el nombre del jugador
      * @param nombre
-     * @param cantGanadas
-     * @param cantPerdidas
-     * @param cantEmpatadas
+     * @param cantidades
      */
-    public void insertaNodoJugador(String nombre, int cantGanadas, int cantPerdidas, int cantEmpatadas){
-        Entidad_Estadistica nuevoNodo=new Entidad_Estadistica(nombre, cantGanadas, cantPerdidas, cantEmpatadas);
+    public void insertaNodoJugador(String nombre, int [] cantidades){
+        Entidad_Estadistica nuevoNodo=new Entidad_Estadistica(nombre, cantidades[0], cantidades[1], cantidades[2]);
         if(esVacia()){
             primeroEstadistica=nuevoNodo;
         }
@@ -70,18 +66,16 @@ public class Lista_Estadisticas_Game {
     /**
      * Metodo que permite modificar por medio del nombre del jugador las cantidades de la estadistica
      * @param nombre
-     * @param cantGanadas
-     * @param cantPerdidas
-     * @param cantEmpatadas
+     * @param cantidades
      */
-    public void modificarNodoJugador(String nombre, int cantGanadas, int cantPerdidas, int cantEmpatadas){
+    public void modificarNodoJugador(String nombre, int [] cantidades){
         if(!esVacia()){
             Entidad_Estadistica temporal=primeroEstadistica;
             while(temporal!=null){
                 if(nombre.equals(temporal.getJugador())){
-                    temporal.setCantGanado(cantGanadas);
-                    temporal.setCantGanado(cantPerdidas);
-                    temporal.setCantGanado(cantEmpatadas);
+                    temporal.setCantGanado(cantidades[0]);
+                    temporal.setCantPerdido(cantidades[1]);
+                    temporal.setCantEmpatado(cantidades[2]);
                 }
                 temporal=temporal.siguiente;
             }
@@ -92,7 +86,6 @@ public class Lista_Estadisticas_Game {
     /**
      * Metodo que consulta si existe o no el jugador
      * @param nomJugador
-     * @param leg
      * @return
      */
     public boolean existenciaJugadorEstadistica(String nomJugador){

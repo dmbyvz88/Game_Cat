@@ -45,23 +45,37 @@ public class Acceso_Estadisticas_Jugadores {
             case "Ganada"://Registra los Jugadores que desean jugar
                 cantidadesJ1=LEG.consultaCantidades(jugadores[0]);
                 cantidadesJ2=LEG.consultaCantidades(jugadores[1]);
-                if(LEG.existenciaJugadorEstadistica(jugadorGanador) && LEG.existenciaJugadorEstadistica(jugadorPerdedor)){
-                    LEG.modificarNodoJugador(jugadorGanador, cantidadesJ1[0]++, cantidadesJ1[1], cantidadesJ1[2]);
-                    LEG.modificarNodoJugador(jugadorPerdedor, cantidadesJ2[0], cantidadesJ2[1]++, cantidadesJ2[2]);
+                if(LEG.existenciaJugadorEstadistica(jugadorGanador) 
+                        && LEG.existenciaJugadorEstadistica(jugadorPerdedor)){
+                    if(jugadorGanador.equals(jugadores[0])){
+                        cantidadesJ1[0]=cantidadesJ1[0]+1;
+                        cantidadesJ2[1]=cantidadesJ2[1]+1;
+                    }else if(jugadorGanador.equals(jugadores[1])){
+                        cantidadesJ1[1]=cantidadesJ1[1]+1;
+                        cantidadesJ2[0]=cantidadesJ2[0]+1;
+                    }
+                    LEG.modificarNodoJugador(jugadorGanador, cantidadesJ1);
+                    LEG.modificarNodoJugador(jugadorPerdedor, cantidadesJ2);
                 }else{
-                    LEG.insertaNodoJugador(jugadorGanador, cantidadesJ1[0]++, cantidadesJ1[1], cantidadesJ1[2]);
-                    LEG.insertaNodoJugador(jugadorPerdedor, cantidadesJ2[0], cantidadesJ2[1]++, cantidadesJ2[2]);
+                    cantidadesJ1[0]=cantidadesJ1[0]+1;
+                    cantidadesJ2[1]=cantidadesJ2[1]+1;
+                    LEG.insertaNodoJugador(jugadorGanador, cantidadesJ1);
+                    LEG.insertaNodoJugador(jugadorPerdedor, cantidadesJ2);
                 }
                 break;
             case "Empatada":
                 cantidadesJ1=LEG.consultaCantidades(this.jugadoresActuales[0]);
                 cantidadesJ2=LEG.consultaCantidades(jugadores[1]);
                 if(LEG.existenciaJugadorEstadistica(jugadorGanador)){
-                    LEG.modificarNodoJugador(jugadorGanador, cantidadesJ1[0], cantidadesJ1[1], cantidadesJ1[2]++);
-                    LEG.modificarNodoJugador(jugadorPerdedor, cantidadesJ2[0], cantidadesJ2[1], cantidadesJ2[2]++);
+                    cantidadesJ1[0]=cantidadesJ1[2]+1;
+                    cantidadesJ2[1]=cantidadesJ2[2]+1;
+                    LEG.modificarNodoJugador(jugadorGanador, cantidadesJ1);
+                    LEG.modificarNodoJugador(jugadorPerdedor, cantidadesJ2);
                 }else{
-                    LEG.insertaNodoJugador(jugadorGanador, cantidadesJ1[0]+1, cantidadesJ1[1], cantidadesJ1[2]++);
-                    LEG.insertaNodoJugador(jugadorPerdedor, cantidadesJ2[0], cantidadesJ2[1], cantidadesJ2[2]++);
+                    cantidadesJ1[0]=cantidadesJ1[2]+1;
+                    cantidadesJ2[1]=cantidadesJ2[2]+1;
+                    LEG.insertaNodoJugador(jugadorGanador, cantidadesJ1);
+                    LEG.insertaNodoJugador(jugadorPerdedor, cantidadesJ2);
                 }
                 break;
         }

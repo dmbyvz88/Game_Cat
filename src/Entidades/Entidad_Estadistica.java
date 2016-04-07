@@ -11,9 +11,7 @@ package Entidades;
  */
 public class Entidad_Estadistica {
     private String jugador;
-    private int cantGanado;
-    private int cantPerdido;
-    private int cantEmpatado;
+    private int cantGanado, cantPerdido, cantEmpatado;
     public Entidad_Estadistica siguiente=null;
 
     /**

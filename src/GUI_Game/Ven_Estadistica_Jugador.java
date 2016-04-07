@@ -5,19 +5,35 @@
  */
 package GUI_Game;
 
+import Listas.Lista_Estadisticas_Game;
+
 /**
  *
  * @author Diego
  */
 public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
-
+    private Lista_Estadisticas_Game LEG = new Lista_Estadisticas_Game();
     /**
      * Creates new form Ven_Estadistica_Jugador
+     * @param LEG
+     * @param jugador
      */
-    public Ven_Estadistica_Jugador() {
+    public Ven_Estadistica_Jugador(Lista_Estadisticas_Game LEG, String jugador) {
+        this.LEG=LEG;
         initComponents();
+        cargaEstadisticas(jugador);
     }
-
+    /**
+     * Metodo que carga los datos de las estadisticas del jugador seleccionado en los labels
+     * @param j
+     */
+    public void cargaEstadisticas(String j){
+        int[] cantidades = LEG.consultaCantidades(j);
+        lbNombreJugador.setText(j);
+        lbTotalGanadas.setText(String.valueOf(cantidades[0]));
+        lbTotalPerdidas.setText(String.valueOf(cantidades[1]));
+        lbTotalEmpatadas.setText(String.valueOf(cantidades[2]));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,10 +45,39 @@ public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        lbNombreJugador = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lbTotalGanadas = new javax.swing.JLabel();
+        lbTotalPerdidas = new javax.swing.JLabel();
+        lbTotalEmpatadas = new javax.swing.JLabel();
+        btSalir = new javax.swing.JButton();
 
         setTitle("Estadistica Jugador");
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Nombre del Jugador:");
+
+        lbNombreJugador.setText("jLabel2");
+
+        jLabel3.setText("Juegos Ganados:");
+
+        jLabel4.setText("Juegos Perdidos:");
+
+        jLabel5.setText("Juegos Empatados:");
+
+        lbTotalGanadas.setText("jLabel6");
+
+        lbTotalPerdidas.setText("jLabel7");
+
+        lbTotalEmpatadas.setText("jLabel8");
+
+        btSalir.setText("Salir");
+        btSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -40,15 +85,44 @@ public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(299, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btSalir)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbNombreJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbTotalGanadas)
+                            .addComponent(lbTotalPerdidas)
+                            .addComponent(lbTotalEmpatadas))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbNombreJugador))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lbTotalGanadas))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lbTotalPerdidas))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lbTotalEmpatadas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(btSalir)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -65,9 +139,21 @@ public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbNombreJugador;
+    private javax.swing.JLabel lbTotalEmpatadas;
+    private javax.swing.JLabel lbTotalGanadas;
+    private javax.swing.JLabel lbTotalPerdidas;
     // End of variables declaration//GEN-END:variables
 }
