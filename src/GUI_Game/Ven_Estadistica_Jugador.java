@@ -9,7 +9,9 @@ import Listas.Lista_Estadisticas_Game;
 
 /**
  *
- * @author Diego
+ * Fecha Inicial Creación 05/03/2016
+ * Fecha Finalización Creación 07/04/2016
+ * @author Diego Murillo Barrantes
  */
 public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
     private Lista_Estadisticas_Game LEG = new Lista_Estadisticas_Game();
@@ -53,11 +55,18 @@ public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
         lbTotalPerdidas = new javax.swing.JLabel();
         lbTotalEmpatadas = new javax.swing.JLabel();
         btSalir = new javax.swing.JButton();
+        lbImagen = new javax.swing.JLabel();
 
         setTitle("Estadistica Jugador");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/bar.png"))); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 2, new java.awt.Color(0, 0, 0)));
 
         jLabel1.setText("Nombre del Jugador:");
 
+        lbNombreJugador.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbNombreJugador.setForeground(new java.awt.Color(0, 102, 204));
         lbNombreJugador.setText("jLabel2");
 
         jLabel3.setText("Juegos Ganados:");
@@ -66,12 +75,19 @@ public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Juegos Empatados:");
 
+        lbTotalGanadas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbTotalGanadas.setForeground(new java.awt.Color(0, 102, 204));
         lbTotalGanadas.setText("jLabel6");
 
+        lbTotalPerdidas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbTotalPerdidas.setForeground(new java.awt.Color(0, 102, 204));
         lbTotalPerdidas.setText("jLabel7");
 
+        lbTotalEmpatadas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbTotalEmpatadas.setForeground(new java.awt.Color(0, 102, 204));
         lbTotalEmpatadas.setText("jLabel8");
 
+        btSalir.setBackground(new java.awt.Color(255, 204, 102));
         btSalir.setText("Salir");
         btSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,49 +95,53 @@ public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
             }
         });
 
+        lbImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Picture/bar.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btSalir)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbNombreJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbTotalGanadas)
-                            .addComponent(lbTotalPerdidas)
-                            .addComponent(lbTotalEmpatadas))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lbImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbNombreJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTotalGanadas)
+                    .addComponent(lbTotalPerdidas)
+                    .addComponent(lbTotalEmpatadas)
+                    .addComponent(btSalir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lbNombreJugador))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lbTotalGanadas))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lbTotalPerdidas))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lbTotalEmpatadas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(btSalir)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lbTotalGanadas))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lbTotalPerdidas))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(lbTotalEmpatadas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbImagen))
+                    .addComponent(btSalir, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
@@ -151,6 +171,7 @@ public class Ven_Estadistica_Jugador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbImagen;
     private javax.swing.JLabel lbNombreJugador;
     private javax.swing.JLabel lbTotalEmpatadas;
     private javax.swing.JLabel lbTotalGanadas;

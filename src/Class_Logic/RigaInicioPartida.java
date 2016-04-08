@@ -9,7 +9,9 @@ import java.util.Random;
 
 /**
  *
- * @author Diego
+ * Fecha Inicial Creación 05/03/2016
+ * Fecha Finalización Creación 07/04/2016
+ * @author Diego Murillo Barrantes
  */
 public class RigaInicioPartida {
     String jugador1;

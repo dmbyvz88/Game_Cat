@@ -10,7 +10,9 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Diego
+ * Fecha Inicial Creación 05/03/2016
+ * Fecha Finalización Creación 07/04/2016
+ * @author Diego Murillo Barrantes
  */
 public class Lista_Estadisticas_Game {
     public Entidad_Estadistica primeroEstadistica;

@@ -11,7 +11,9 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Diego
+ * Fecha Inicial Creación 05/03/2016
+ * Fecha Finalización Creación 07/04/2016
+ * @author Diego Murillo Barrantes
  */
 public class Lista_Jugadores {
     public Entidad_Jugador primero;
@@ -44,35 +46,6 @@ public class Lista_Jugadores {
         cont++;
     }
     /**
-     * Metodo que permite eliminar un nodo de la lista
-     * @param nombreJugador
-     */
-    public void eliminaNodoJugador(String nombreJugador){
-        if(!esVacia()){
-            Entidad_Jugador anterior=primero;  //Creo un anterior de la clase para usarlo solo aqui
-            Entidad_Jugador temporal=primero;  //Creo un temporal en el nodo para usarlo aqui
-            //Primero esenario, es si el primero nodo jugador es el que estamos buscando, por lo que lo elimina
-            if (nombreJugador.equals(temporal.getJugador()) && primero.siguiente==null){
-                primero=null;
-                cont=0;
-            }else if(nombreJugador.equals(temporal.getJugador()) && primero.siguiente!=null){
-                primero=primero.siguiente;
-                temporal=null;
-                cont--;
-            }else{
-                while(temporal!=null){
-                    anterior=temporal;
-                    temporal=temporal.siguiente;
-                    if (nombreJugador.equals(temporal.getJugador())){
-                        anterior.siguiente=temporal.siguiente;
-                        temporal=null;
-                        cont--;
-                    }
-                }
-            }
-        }
-    }    
-    /**
      * Metodo que permite mostrar la lista de los jugadores
      * @return 
      */
@@ -92,25 +65,5 @@ public class Lista_Jugadores {
             JOptionPane.showMessageDialog(null, "No hay Jugadores registrados.");
         }
         return jugadores;
-    }
-    /**
-     * Metodo que permite mostrar la lista de los jugadores
-     * @param jugador
-     * @return 
-     */
-    public boolean existenciaJugador(String jugador){
-        boolean encontrado=false;
-        if(!esVacia()){
-            Entidad_Jugador temporal=primero;
-            while(temporal!=null){
-                if(temporal.getJugador().equals(jugador)){
-                    encontrado=true;
-                    break;
-                }else{
-                    temporal=temporal.siguiente;
-                }
-            }
-        }
-        return encontrado;
     }
 }
