@@ -35,7 +35,7 @@ public class AccesoListaJuego {
             lista.insertaNodoJugador(jugadores[0]);
             lista.insertaNodoJugador(jugadores[1]);
         }
-        Principal.listaJugadores=jugadores=null;
+        Principal.listaJugadores=jugadores;
         return lista;
     }
 }

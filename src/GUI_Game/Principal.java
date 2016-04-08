@@ -21,7 +21,7 @@ import static javax.swing.JOptionPane.YES_OPTION;
  * @author Diego Murillo Barrantes
  */
 public class Principal extends javax.swing.JFrame {
-    public static String[] listaJugadores;
+    public static String[] listaJugadores= null;
     public static Lista_Jugadores LJ = new Lista_Jugadores();
     public static Lista_Estadisticas_Game LEG = new Lista_Estadisticas_Game();
     AccesoListaJuego validaInicioJuego = new AccesoListaJuego(LJ);
