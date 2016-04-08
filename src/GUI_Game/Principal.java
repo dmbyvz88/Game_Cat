@@ -25,7 +25,6 @@ public class Principal extends javax.swing.JFrame {
     public static Lista_Jugadores LJ = new Lista_Jugadores();
     public static Lista_Estadisticas_Game LEG = new Lista_Estadisticas_Game();
     AccesoListaJuego validaInicioJuego = new AccesoListaJuego(LJ);
-   // Acceso_Estadisticas_Jugadores AEJ = new Acceso_Estadisticas_Jugadores(listaJugadores);
     static Tablero_Estado_Juego  CEJ=new Tablero_Estado_Juego();
     
     public static String [][] matrizJuegoPendiente = new String [3][3];

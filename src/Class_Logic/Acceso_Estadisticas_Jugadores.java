@@ -16,7 +16,6 @@ import Listas.Lista_Jugadores;
  */
 public class Acceso_Estadisticas_Jugadores {
     private String [] jugadoresActuales;
-    //private Lista_Jugadores LJ;
     private Lista_Estadisticas_Game LEG;
     private Lista_Jugadores LJ;
     /**

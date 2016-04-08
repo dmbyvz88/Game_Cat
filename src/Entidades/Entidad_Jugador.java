@@ -13,7 +13,6 @@ package Entidades;
  */
 public class Entidad_Jugador {
     String nombre;
-    int cantGanado;
     public Entidad_Jugador siguiente=null;
     public Entidad_Jugador(){}
     /**
@@ -22,7 +21,6 @@ public class Entidad_Jugador {
      */
     public Entidad_Jugador(String jugador){
         this.nombre=jugador;
-        this.cantGanado=0;
     }
     /**
      * Metodo que envia el nombre del jugador
@@ -37,19 +35,5 @@ public class Entidad_Jugador {
      */
     public void setJugador(String jugador){
         this.nombre=jugador;
-    }
-    /**
-     * Metodo que envia el nombre del jugador
-     * @return
-     */
-    public int getCantGanado(){
-        return this.cantGanado;
-    }
-    /**
-     * Metodo que recoge el nombre del jugador
-     * @param cant
-     */
-    public void setCantGanado(int cant){
-        this.cantGanado=cant;
     }
 }

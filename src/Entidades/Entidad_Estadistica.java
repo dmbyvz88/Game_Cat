@@ -54,7 +54,7 @@ public class Entidad_Estadistica {
      * Metodo que envia la cantidad de veces que el jugador a ganado
      * @return
      */
-    public int getCantGanado(){
+        public int getCantGanado(){
         return this.cantGanado;
     }
     /**
