@@ -462,21 +462,21 @@ public class Principal extends javax.swing.JFrame {
                     Ven_Juego ven = new Ven_Juego(matrizJuegoPendiente, listaJugadores, jugMoviendo, LEG, LJ);
                     jDesktopPane1.add(ven);
                     ven.setVisible(true);
-                    jdSelecJugadores.dispose();
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe de elegir jugadores diferentes.");
                 }
         }
+        jdSelecJugadores.dispose();
     }//GEN-LAST:event_btAceptarActionPerformed
 
     private void btConsultaEstadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultaEstadisticaActionPerformed
         if(!"".equals(cbListaJugadores.getSelectedItem().toString())){
             Ven_Estadistica_Jugador ven = new Ven_Estadistica_Jugador(LEG, 
                     cbListaJugadores.getSelectedItem().toString());
-            jdListaJugadores.dispose();
             jDesktopPane1.add(ven);
             ven.setVisible(true);
         }
+        jdListaJugadores.dispose();
     }//GEN-LAST:event_btConsultaEstadisticaActionPerformed
 
     /**
